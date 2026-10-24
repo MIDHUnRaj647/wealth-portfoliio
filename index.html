@@ -269,25 +269,33 @@
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6 sm:space-y-8 w-full flex-1">
 
             <!-- Live FD & Mutual Fund SIP Due Date Notification Alert Banner -->
-            <div id="fd-alert-banner" class="hidden relative p-4 rounded-2xl bg-gradient-to-r from-[#C8A96B]/25 via-[#C8A96B]/15 to-transparent border border-[#C8A96B]/50 text-[#1C241E] dark:text-[#F7F4ED] shadow-sm transition-all duration-300">
+            <div id="fd-alert-banner"
+                class="hidden relative p-4 rounded-2xl bg-gradient-to-r from-[#C8A96B]/25 via-[#C8A96B]/15 to-transparent border border-[#C8A96B]/50 text-[#1C241E] dark:text-[#F7F4ED] shadow-sm transition-all duration-300">
                 <div class="flex items-start sm:items-center justify-between gap-3">
                     <div class="flex items-center gap-3">
-                        <span class="w-9 h-9 rounded-xl bg-[#C8A96B] text-[#131714] flex items-center justify-center font-extrabold shrink-0 shadow-xs">
+                        <span
+                            class="w-9 h-9 rounded-xl bg-[#C8A96B] text-[#131714] flex items-center justify-center font-extrabold shrink-0 shadow-xs">
                             <i class="fa-solid fa-bell text-sm animate-bounce"></i>
                         </span>
                         <div>
-                            <h4 id="fd-alert-banner-title" class="font-extrabold text-xs sm:text-sm text-[#967634] dark:text-[#C8A96B]">Portfolio Alert Notice</h4>
-                            <div id="fd-alert-banner-text" class="text-xs text-[#1C241E] dark:text-[#F7F4ED] mt-0.5"></div>
+                            <h4 id="fd-alert-banner-title"
+                                class="font-extrabold text-xs sm:text-sm text-[#967634] dark:text-[#C8A96B]">Portfolio
+                                Alert Notice</h4>
+                            <div id="fd-alert-banner-text" class="text-xs text-[#1C241E] dark:text-[#F7F4ED] mt-0.5">
+                            </div>
                         </div>
                     </div>
-                    <button onclick="document.getElementById('fd-alert-banner').classList.add('hidden')" class="text-xs text-[#5E7060] hover:text-[#1C241E] dark:hover:text-white p-1 rounded-lg" title="Dismiss">
+                    <button onclick="document.getElementById('fd-alert-banner').classList.add('hidden')"
+                        class="text-xs text-[#5E7060] hover:text-[#1C241E] dark:hover:text-white p-1 rounded-lg"
+                        title="Dismiss">
                         <i class="fa-solid fa-xmark text-sm"></i>
                     </button>
                 </div>
             </div>
 
             <!-- Hidden Form & Iframe for Silent Email Dispatch to midhunmoorthiyedam@gmail.com without CORS issues -->
-            <iframe id="fd-email-iframe" name="fd-email-iframe" class="hidden" style="display:none; width:0; height:0; border:0;"></iframe>
+            <iframe id="fd-email-iframe" name="fd-email-iframe" class="hidden"
+                style="display:none; width:0; height:0; border:0;"></iframe>
             <form id="fd-email-form" method="POST" target="fd-email-iframe" class="hidden" style="display:none;">
                 <input type="hidden" name="_subject" id="fd-email-subject">
                 <input type="hidden" name="_captcha" value="false">
@@ -630,8 +638,10 @@
                                     <i class="fa-solid fa-building-columns"></i>
                                 </div>
                                 <div>
-                                    <h2 class="font-bold text-base text-[#1C241E] dark:text-[#F7F4ED]">Bank Accounts & Fixed Deposits (FD)</h2>
-                                    <p class="text-[11px] text-[#5E7060] dark:text-[#A4B5A3]">Liquid savings & auto-alert fixed deposits</p>
+                                    <h2 class="font-bold text-base text-[#1C241E] dark:text-[#F7F4ED]">Bank Accounts &
+                                        Fixed Deposits (FD)</h2>
+                                    <p class="text-[11px] text-[#5E7060] dark:text-[#A4B5A3]">Liquid savings &
+                                        auto-alert fixed deposits</p>
                                 </div>
                             </div>
                             <button type="button" onclick="addFDRow()"
@@ -644,8 +654,10 @@
                         <!-- Savings Account Field -->
                         <div class="mb-5 pb-4 border-b border-[#C7D3C0]/50 dark:border-[#8FA28A]/15">
                             <div class="flex items-center justify-between mb-1.5">
-                                <label class="block text-xs text-[#5E7060] dark:text-[#A4B5A3] font-semibold">Savings Accounts Balance (₹)</label>
-                                <span class="text-[10px] text-[#5E7060]/70 dark:text-[#A4B5A3]/70 font-medium">All Bank Accounts</span>
+                                <label class="block text-xs text-[#5E7060] dark:text-[#A4B5A3] font-semibold">Savings
+                                    Accounts Balance (₹)</label>
+                                <span class="text-[10px] text-[#5E7060]/70 dark:text-[#A4B5A3]/70 font-medium">All Bank
+                                    Accounts</span>
                             </div>
                             <input type="number" id="savings-amt" oninput="saveAndRecalculate()"
                                 class="w-full bg-[#F7F4ED]/80 dark:bg-[#131714]/80 border border-[#C7D3C0] dark:border-[#8FA28A]/25 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-[#1C241E] dark:text-[#F7F4ED] placeholder-[#5E7060]/50 focus:outline-none focus:border-[#8FA28A] focus:ring-4 focus:ring-[#8FA28A]/15 transition tabular-nums"
@@ -653,14 +665,19 @@
                         </div>
 
                         <!-- In-Card Alert Notification Notice -->
-                        <div id="fd-card-alert-box" class="hidden mb-4 p-3.5 rounded-xl bg-[#C8A96B]/20 border border-[#C8A96B]/40 text-xs text-[#1C241E] dark:text-[#F7F4ED] flex items-center justify-between gap-3 shadow-xs transition-all">
+                        <div id="fd-card-alert-box"
+                            class="hidden mb-4 p-3.5 rounded-xl bg-[#C8A96B]/20 border border-[#C8A96B]/40 text-xs text-[#1C241E] dark:text-[#F7F4ED] flex items-center justify-between gap-3 shadow-xs transition-all">
                             <div class="flex items-center gap-2.5 min-w-0">
-                                <span class="w-7 h-7 rounded-lg bg-[#C8A96B] text-[#131714] flex items-center justify-center font-bold shrink-0">
+                                <span
+                                    class="w-7 h-7 rounded-lg bg-[#C8A96B] text-[#131714] flex items-center justify-center font-bold shrink-0">
                                     <i class="fa-solid fa-envelope text-xs"></i>
                                 </span>
-                                <div id="fd-card-alert-text" class="truncate sm:whitespace-normal font-medium text-[11px] sm:text-xs"></div>
+                                <div id="fd-card-alert-text"
+                                    class="truncate sm:whitespace-normal font-medium text-[11px] sm:text-xs"></div>
                             </div>
-                            <button onclick="document.getElementById('fd-card-alert-box').classList.add('hidden')" class="text-[#5E7060] hover:text-[#1C241E] dark:hover:text-white p-1 shrink-0" title="Dismiss">
+                            <button onclick="document.getElementById('fd-card-alert-box').classList.add('hidden')"
+                                class="text-[#5E7060] hover:text-[#1C241E] dark:hover:text-white p-1 shrink-0"
+                                title="Dismiss">
                                 <i class="fa-solid fa-xmark text-xs"></i>
                             </button>
                         </div>
@@ -669,8 +686,11 @@
                         <div>
                             <div class="flex flex-wrap items-center justify-between gap-2 mb-2.5">
                                 <div class="flex items-center gap-2">
-                                    <span class="text-xs font-bold text-[#1C241E] dark:text-[#F7F4ED]">Fixed Deposit Records</span>
-                                    <span id="fd-total-pill" class="text-[11px] font-extrabold text-[#4D5E4F] dark:text-[#C7D3C0] bg-[#C7D3C0]/30 px-2 py-0.5 rounded-md tabular-nums">Total: ₹0</span>
+                                    <span class="text-xs font-bold text-[#1C241E] dark:text-[#F7F4ED]">Fixed Deposit
+                                        Records</span>
+                                    <span id="fd-total-pill"
+                                        class="text-[11px] font-extrabold text-[#4D5E4F] dark:text-[#C7D3C0] bg-[#C7D3C0]/30 px-2 py-0.5 rounded-md tabular-nums">Total:
+                                        ₹0</span>
                                 </div>
                                 <span class="text-[10px] text-[#5E7060] dark:text-[#A4B5A3] flex items-center gap-1">
                                     <i class="fa-solid fa-envelope text-[9px] text-[#8FA28A]"></i>
@@ -681,7 +701,8 @@
                             <div class="overflow-x-auto -mx-5 px-5 sm:mx-0 sm:px-0">
                                 <table class="w-full text-left text-xs min-w-[500px]">
                                     <thead>
-                                        <tr class="text-[#5E7060] dark:text-[#A4B5A3] border-b border-[#C7D3C0] dark:border-[#8FA28A]/20 text-[10px] uppercase tracking-wider">
+                                        <tr
+                                            class="text-[#5E7060] dark:text-[#A4B5A3] border-b border-[#C7D3C0] dark:border-[#8FA28A]/20 text-[10px] uppercase tracking-wider">
                                             <th class="pb-2 font-bold min-w-[130px]">Bank Name</th>
                                             <th class="pb-2 font-bold w-28">Amount (₹)</th>
                                             <th class="pb-2 font-bold min-w-[130px]">Maturity Due Date</th>
@@ -689,7 +710,8 @@
                                             <th class="pb-2 w-8"></th>
                                         </tr>
                                     </thead>
-                                    <tbody id="fd-table-body" class="divide-y divide-[#C7D3C0]/50 dark:divide-[#8FA28A]/15">
+                                    <tbody id="fd-table-body"
+                                        class="divide-y divide-[#C7D3C0]/50 dark:divide-[#8FA28A]/15">
                                         <!-- Injected via renderFDRows() -->
                                     </tbody>
                                 </table>
@@ -708,13 +730,19 @@
                                     <i class="fa-solid fa-shield-halved"></i>
                                 </div>
                                 <div>
-                                    <h2 class="font-bold text-base text-[#1C241E] dark:text-[#F7F4ED]">LIC & Life Insurance Policies</h2>
-                                    <p class="text-[11px] text-[#5E7060] dark:text-[#A4B5A3]">Policy cover & automated premium due alerts</p>
+                                    <h2 class="font-bold text-base text-[#1C241E] dark:text-[#F7F4ED]">LIC & Life
+                                        Insurance Policies</h2>
+                                    <p class="text-[11px] text-[#5E7060] dark:text-[#A4B5A3]">Policy cover & automated
+                                        premium due alerts</p>
                                 </div>
                             </div>
                             <div class="flex items-center gap-2 flex-wrap">
-                                <span id="lic-sum-pill" class="text-[11px] font-extrabold text-[#4D5E4F] dark:text-[#C7D3C0] bg-[#C7D3C0]/30 px-2.5 py-1 rounded-xl tabular-nums">Cover: ₹0</span>
-                                <span id="lic-premium-pill" class="text-[11px] font-extrabold text-[#967634] dark:text-[#C8A96B] bg-[#C8A96B]/20 border border-[#C8A96B]/35 px-2.5 py-1 rounded-xl tabular-nums">Premium: ₹0/yr</span>
+                                <span id="lic-sum-pill"
+                                    class="text-[11px] font-extrabold text-[#4D5E4F] dark:text-[#C7D3C0] bg-[#C7D3C0]/30 px-2.5 py-1 rounded-xl tabular-nums">Cover:
+                                    ₹0</span>
+                                <span id="lic-premium-pill"
+                                    class="text-[11px] font-extrabold text-[#967634] dark:text-[#C8A96B] bg-[#C8A96B]/20 border border-[#C8A96B]/35 px-2.5 py-1 rounded-xl tabular-nums">Premium:
+                                    ₹0/yr</span>
                                 <button type="button" onclick="addLICRow()"
                                     class="text-xs bg-[#8FA28A] hover:bg-[#7D9178] active:scale-95 text-white px-3.5 py-1.5 rounded-xl transition duration-200 flex items-center gap-1.5 font-bold shadow-xs">
                                     <i class="fa-solid fa-plus text-[10px]"></i>
@@ -724,14 +752,19 @@
                         </div>
 
                         <!-- In-Card Alert Notification Notice for LIC Policies -->
-                        <div id="lic-card-alert-box" class="hidden mb-4 p-3.5 rounded-xl bg-[#C8A96B]/20 border border-[#C8A96B]/40 text-xs text-[#1C241E] dark:text-[#F7F4ED] flex items-center justify-between gap-3 shadow-xs transition-all">
+                        <div id="lic-card-alert-box"
+                            class="hidden mb-4 p-3.5 rounded-xl bg-[#C8A96B]/20 border border-[#C8A96B]/40 text-xs text-[#1C241E] dark:text-[#F7F4ED] flex items-center justify-between gap-3 shadow-xs transition-all">
                             <div class="flex items-center gap-2.5 min-w-0">
-                                <span class="w-7 h-7 rounded-lg bg-[#C8A96B] text-[#131714] flex items-center justify-center font-bold shrink-0">
+                                <span
+                                    class="w-7 h-7 rounded-lg bg-[#C8A96B] text-[#131714] flex items-center justify-center font-bold shrink-0">
                                     <i class="fa-solid fa-bell text-xs"></i>
                                 </span>
-                                <div id="lic-card-alert-text" class="truncate sm:whitespace-normal font-medium text-[11px] sm:text-xs"></div>
+                                <div id="lic-card-alert-text"
+                                    class="truncate sm:whitespace-normal font-medium text-[11px] sm:text-xs"></div>
                             </div>
-                            <button onclick="document.getElementById('lic-card-alert-box').classList.add('hidden')" class="text-[#5E7060] hover:text-[#1C241E] dark:hover:text-white p-1 shrink-0" title="Dismiss">
+                            <button onclick="document.getElementById('lic-card-alert-box').classList.add('hidden')"
+                                class="text-[#5E7060] hover:text-[#1C241E] dark:hover:text-white p-1 shrink-0"
+                                title="Dismiss">
                                 <i class="fa-solid fa-xmark text-xs"></i>
                             </button>
                         </div>
@@ -739,7 +772,8 @@
                         <div class="overflow-x-auto -mx-5 px-5 sm:mx-0 sm:px-0">
                             <table class="w-full text-left text-xs min-w-[700px]">
                                 <thead>
-                                    <tr class="text-[#5E7060] dark:text-[#A4B5A3] border-b border-[#C7D3C0] dark:border-[#8FA28A]/20 text-[10px] uppercase tracking-wider">
+                                    <tr
+                                        class="text-[#5E7060] dark:text-[#A4B5A3] border-b border-[#C7D3C0] dark:border-[#8FA28A]/20 text-[10px] uppercase tracking-wider">
                                         <th class="pb-2.5 font-bold min-w-[130px]">Policy / Plan Name</th>
                                         <th class="pb-2.5 font-bold w-24">Policy No.</th>
                                         <th class="pb-2.5 font-bold w-24">Premium (₹)</th>
@@ -749,7 +783,8 @@
                                         <th class="pb-2.5 w-8"></th>
                                     </tr>
                                 </thead>
-                                <tbody id="lic-table-body" class="divide-y divide-[#C7D3C0]/50 dark:divide-[#8FA28A]/15">
+                                <tbody id="lic-table-body"
+                                    class="divide-y divide-[#C7D3C0]/50 dark:divide-[#8FA28A]/15">
                                     <!-- Injected via renderLICRows() -->
                                 </tbody>
                             </table>
@@ -757,7 +792,7 @@
                     </div>
 
                     <!-- Persistent Disk Storage & Encrypted Backup Card -->
-                    <div
+                    <!-- <div
                         class="bg-[#FCFAF6]/90 dark:bg-[#1A201B]/90 backdrop-blur-xl border border-[#C7D3C0]/80 dark:border-[#8FA28A]/20 p-5 sm:p-6 rounded-2xl space-y-4 shadow-sm hover:shadow-md transition-shadow">
                         <div class="flex items-center justify-between gap-2 flex-wrap">
                             <div class="flex items-center gap-2.5">
@@ -780,16 +815,16 @@
                             Your portfolio data is backed by <code class="text-[#8FA28A] bg-[#F7F4ED] dark:bg-[#131714] border border-[#C7D3C0] dark:border-[#8FA28A]/25 px-1.5 py-0.5 rounded font-mono text-[11px]">portfolio_data.json</code> and <code class="text-[#8FA28A] bg-[#F7F4ED] dark:bg-[#131714] border border-[#C7D3C0] dark:border-[#8FA28A]/25 px-1.5 py-0.5 rounded font-mono text-[11px]">portfolio_data.js</code> inside your project directory. It is immune to browser cache clearing.
                         </p>
 
-                        <!-- Action Buttons Grid -->
+                        Action Buttons Grid 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
-                            <!-- Direct Disk Save / Sync Button -->
+                            Direct Disk Save / Sync Button 
                             <button type="button" onclick="syncWithDiskFile()"
                                 class="w-full bg-[#8FA28A] hover:bg-[#7D9178] active:scale-[0.98] text-white text-xs py-2.5 px-3 rounded-xl transition duration-200 flex items-center justify-center gap-2 font-bold shadow-xs">
                                 <i class="fa-solid fa-floppy-disk text-xs"></i>
                                 <span>Save to Disk JSON</span>
                             </button>
 
-                            <!-- Download Backup Button -->
+                            Download Backup Button 
                             <button type="button" onclick="exportData()"
                                 class="w-full bg-[#F7F4ED] dark:bg-[#131714] hover:bg-[#EDE8DC] dark:hover:bg-[#202721] active:scale-[0.98] border border-[#C7D3C0] dark:border-[#8FA28A]/25 text-xs py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-2 text-[#1C241E] dark:text-[#F7F4ED] font-bold shadow-xs hover:border-[#8FA28A]/50">
                                 <i class="fa-solid fa-file-arrow-down text-xs text-[#8FA28A]"></i>
@@ -797,7 +832,7 @@
                             </button>
                         </div>
 
-                        <!-- Import / Restore Button -->
+                       Import / Restore Button 
                         <div class="pt-1">
                             <input type="file" id="import-json-input" accept=".json" class="hidden" onchange="importDataFromFile(event)">
                             <button type="button" onclick="document.getElementById('import-json-input').click()"
@@ -806,7 +841,7 @@
                                 <span>Import / Restore from JSON File</span>
                             </button>
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
 
@@ -824,13 +859,19 @@
                                     <i class="fa-solid fa-arrow-trend-up"></i>
                                 </div>
                                 <div>
-                                    <h2 class="font-bold text-base text-[#1C241E] dark:text-[#F7F4ED]">Mutual Funds & SIP Portfolio</h2>
-                                    <p class="text-[11px] text-[#5E7060] dark:text-[#A4B5A3]">Live NAV tracking & automated monthly SIP due alerts</p>
+                                    <h2 class="font-bold text-base text-[#1C241E] dark:text-[#F7F4ED]">Mutual Funds &
+                                        SIP Portfolio</h2>
+                                    <p class="text-[11px] text-[#5E7060] dark:text-[#A4B5A3]">Live NAV tracking &
+                                        automated monthly SIP due alerts</p>
                                 </div>
                             </div>
                             <div class="flex items-center gap-2 flex-wrap">
-                                <span id="mf-total-pill" class="text-[11px] font-extrabold text-[#4D5E4F] dark:text-[#C7D3C0] bg-[#C7D3C0]/30 px-2.5 py-1 rounded-xl tabular-nums">Total: ₹0</span>
-                                <span id="mf-sip-pill" class="text-[11px] font-extrabold text-[#967634] dark:text-[#C8A96B] bg-[#C8A96B]/20 border border-[#C8A96B]/35 px-2.5 py-1 rounded-xl tabular-nums">SIP: ₹0/mo</span>
+                                <span id="mf-total-pill"
+                                    class="text-[11px] font-extrabold text-[#4D5E4F] dark:text-[#C7D3C0] bg-[#C7D3C0]/30 px-2.5 py-1 rounded-xl tabular-nums">Total:
+                                    ₹0</span>
+                                <span id="mf-sip-pill"
+                                    class="text-[11px] font-extrabold text-[#967634] dark:text-[#C8A96B] bg-[#C8A96B]/20 border border-[#C8A96B]/35 px-2.5 py-1 rounded-xl tabular-nums">SIP:
+                                    ₹0/mo</span>
                                 <button type="button" onclick="addMFRow()"
                                     class="text-xs bg-[#8FA28A] hover:bg-[#7D9178] active:scale-95 text-white px-3.5 py-1.5 rounded-xl transition duration-200 flex items-center gap-1.5 font-bold shadow-xs">
                                     <i class="fa-solid fa-plus text-[10px]"></i>
@@ -840,14 +881,19 @@
                         </div>
 
                         <!-- In-Card Alert Notification Notice for Mutual Funds SIP -->
-                        <div id="mf-card-alert-box" class="hidden mb-4 p-3.5 rounded-xl bg-[#8FA28A]/20 border border-[#8FA28A]/40 text-xs text-[#1C241E] dark:text-[#F7F4ED] flex items-center justify-between gap-3 shadow-xs transition-all">
+                        <div id="mf-card-alert-box"
+                            class="hidden mb-4 p-3.5 rounded-xl bg-[#8FA28A]/20 border border-[#8FA28A]/40 text-xs text-[#1C241E] dark:text-[#F7F4ED] flex items-center justify-between gap-3 shadow-xs transition-all">
                             <div class="flex items-center gap-2.5 min-w-0">
-                                <span class="w-7 h-7 rounded-lg bg-[#8FA28A] text-white flex items-center justify-center font-bold shrink-0">
+                                <span
+                                    class="w-7 h-7 rounded-lg bg-[#8FA28A] text-white flex items-center justify-center font-bold shrink-0">
                                     <i class="fa-solid fa-bell text-xs"></i>
                                 </span>
-                                <div id="mf-card-alert-text" class="truncate sm:whitespace-normal font-medium text-[11px] sm:text-xs"></div>
+                                <div id="mf-card-alert-text"
+                                    class="truncate sm:whitespace-normal font-medium text-[11px] sm:text-xs"></div>
                             </div>
-                            <button onclick="document.getElementById('mf-card-alert-box').classList.add('hidden')" class="text-[#5E7060] hover:text-[#1C241E] dark:hover:text-white p-1 shrink-0" title="Dismiss">
+                            <button onclick="document.getElementById('mf-card-alert-box').classList.add('hidden')"
+                                class="text-[#5E7060] hover:text-[#1C241E] dark:hover:text-white p-1 shrink-0"
+                                title="Dismiss">
                                 <i class="fa-solid fa-xmark text-xs"></i>
                             </button>
                         </div>
@@ -1261,7 +1307,7 @@
             const banner = document.getElementById('fd-alert-banner');
             const textEl = document.getElementById('fd-alert-banner-text');
             const titleEl = document.getElementById('fd-alert-banner-title');
-            
+
             let cardBox, cardText;
             if (targetCategory === 'mf') {
                 cardBox = document.getElementById('mf-card-alert-box');
@@ -1317,8 +1363,8 @@
                 }
             }
 
-            const alertSentNotice = (fd && fd.lastAlertSent) 
-                ? `<span class="text-[9px] text-[#5E7060]/80 dark:text-[#A4B5A3]/80 block mt-0.5" title="Alert dispatched on ${fd.lastAlertSent}"><i class="fa-solid fa-check-double text-[#8FA28A]"></i> Alerted ${new Date(fd.lastAlertSent).toLocaleDateString()}</span>` 
+            const alertSentNotice = (fd && fd.lastAlertSent)
+                ? `<span class="text-[9px] text-[#5E7060]/80 dark:text-[#A4B5A3]/80 block mt-0.5" title="Alert dispatched on ${fd.lastAlertSent}"><i class="fa-solid fa-check-double text-[#8FA28A]"></i> Alerted ${new Date(fd.lastAlertSent).toLocaleDateString()}</span>`
                 : '';
 
             return `<div>${statusBadge}${alertSentNotice}</div>`;
@@ -1476,7 +1522,7 @@
                         _template: "table",
                         _captcha: "false"
                     })
-                }).catch(() => {});
+                }).catch(() => { });
             } catch (err) {
                 // Ignore background fetch failure, form submission handles delivery
             }
@@ -1531,8 +1577,8 @@
                 }
             }
 
-            const alertSentNotice = (policy && policy.lastAlertSent) 
-                ? `<span class="text-[9px] text-[#5E7060]/80 dark:text-[#A4B5A3]/80 block mt-0.5" title="Premium alert dispatched on ${policy.lastAlertSent}"><i class="fa-solid fa-check-double text-[#8FA28A]"></i> Alerted ${new Date(policy.lastAlertSent).toLocaleDateString()}</span>` 
+            const alertSentNotice = (policy && policy.lastAlertSent)
+                ? `<span class="text-[9px] text-[#5E7060]/80 dark:text-[#A4B5A3]/80 block mt-0.5" title="Premium alert dispatched on ${policy.lastAlertSent}"><i class="fa-solid fa-check-double text-[#8FA28A]"></i> Alerted ${new Date(policy.lastAlertSent).toLocaleDateString()}</span>`
                 : '';
 
             return `<div>${statusBadge}${alertSentNotice}</div>`;
@@ -1728,8 +1774,8 @@
                         _template: "table",
                         _captcha: "false"
                     })
-                }).catch(() => {});
-            } catch (err) {}
+                }).catch(() => { });
+            } catch (err) { }
 
             // Mark alert date
             policy.lastAlertSent = new Date().toISOString();
@@ -1790,8 +1836,8 @@
                 }
             }
 
-            const alertSentNotice = (mf && mf.lastSipAlertSent) 
-                ? `<span class="text-[9px] text-[#5E7060]/80 dark:text-[#A4B5A3]/80 block mt-0.5" title="SIP alert dispatched on ${mf.lastSipAlertSent}"><i class="fa-solid fa-check-double text-[#8FA28A]"></i> Alerted ${new Date(mf.lastSipAlertSent).toLocaleDateString()}</span>` 
+            const alertSentNotice = (mf && mf.lastSipAlertSent)
+                ? `<span class="text-[9px] text-[#5E7060]/80 dark:text-[#A4B5A3]/80 block mt-0.5" title="SIP alert dispatched on ${mf.lastSipAlertSent}"><i class="fa-solid fa-check-double text-[#8FA28A]"></i> Alerted ${new Date(mf.lastSipAlertSent).toLocaleDateString()}</span>`
                 : '';
 
             return `<div>${statusBadge}${alertSentNotice}</div>`;
@@ -1884,14 +1930,14 @@
 
         function addMFRow() {
             if (!state.mutualFunds) state.mutualFunds = [];
-            state.mutualFunds.push({ 
-                name: 'New Fund', 
-                units: 0, 
-                latestNav: 100, 
-                code: '', 
-                sipAmount: 0, 
-                sipDate: '', 
-                lastSipAlertSent: null 
+            state.mutualFunds.push({
+                name: 'New Fund',
+                units: 0,
+                latestNav: 100,
+                code: '',
+                sipAmount: 0,
+                sipDate: '',
+                lastSipAlertSent: null
             });
             renderMFRows();
             saveAndRecalculate();
@@ -1994,8 +2040,8 @@
                         _template: "table",
                         _captcha: "false"
                     })
-                }).catch(() => {});
-            } catch (err) {}
+                }).catch(() => { });
+            } catch (err) { }
 
             // Mark alert date
             mf.lastSipAlertSent = new Date().toISOString();
@@ -2198,8 +2244,8 @@
                         isServerConnected = true;
                         updateDiskSyncBadge("Auto-saved to portfolio_data.json", true);
                     }
-                }).catch(() => {});
-            } catch (e) {}
+                }).catch(() => { });
+            } catch (e) { }
 
             // 2. If Native File System Access handle is active
             if (diskFileHandle) {
@@ -2227,7 +2273,7 @@
                     showNotificationBanner("💾 Successfully saved current portfolio directly into <strong>portfolio_data.json</strong> and <strong>portfolio_data.js</strong>!", false, null, 'fd');
                     return;
                 }
-            } catch (e) {}
+            } catch (e) { }
 
             // Native File System Access API
             if ('showSaveFilePicker' in window) {
