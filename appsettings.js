@@ -31,7 +31,14 @@ const APP_SETTINGS = {
     /**
      * Baseline fallback gold price in ₹ per gram (approximate live market rate).
      */
-    defaultGoldRate: 14438
+    defaultGoldRate: 14438,
+
+    /**
+     * Supabase Cloud Realtime Database Configuration
+     * Project: heypjrfnuiazhfgcvoyg
+     */
+    supabaseUrl: "https://heypjrfnuiazhfgcvoyg.supabase.co",
+    supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhleXBqcmZudWlhemhmZ2N2b3lnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI4NTc2NTEsImV4cCI6MjEwODQzMzY1MX0.GuE625R09QLg5jIBIJC32Qm5fGpu7AqqEh8oFIhQR0M"
 };
 
 // Expose to window for global access

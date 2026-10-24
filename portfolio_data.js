@@ -1,8 +1,6 @@
 /**
  * MI-AS Wealth - Local Portfolio Data File
- * 
- * This file resides directly on your disk in the project directory.
- * It is loaded automatically on startup.
+ * Auto-saved: 2026-10-24T17:01:57.395Z
  */
 
 const PORTFOLIO_DATA = {

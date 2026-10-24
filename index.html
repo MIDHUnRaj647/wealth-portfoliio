@@ -13,6 +13,8 @@
     <!-- Application Settings & Vault Passphrase Config -->
     <script src="appsettings.js"></script>
     <script src="portfolio_data.js"></script>
+    <!-- Supabase Client for Realtime Multi-Device Cloud Sync -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Open Sans Google Font -->
@@ -1261,6 +1263,7 @@
             checkSIPDueDates();
             checkLICDueDates();
             checkLocalServerConnection();
+            initSupabase();
         }
 
         async function fetchLiveMarketData() {
@@ -2576,6 +2579,84 @@
         // -------------------------------------------------------------
         let diskFileHandle = null;
         let isServerConnected = false;
+        let supabaseClient = null;
+        let isSupabaseConnected = false;
+
+        // -------------------------------------------------------------
+        // Supabase Cloud Realtime Database Engine
+        // -------------------------------------------------------------
+        async function initSupabase() {
+            const sbUrl = (window.APP_SETTINGS && window.APP_SETTINGS.supabaseUrl)
+                ? window.APP_SETTINGS.supabaseUrl
+                : "https://heypjrfnuiazhfgcvoyg.supabase.co";
+            const sbAnonKey = (window.APP_SETTINGS && window.APP_SETTINGS.supabaseAnonKey)
+                ? window.APP_SETTINGS.supabaseAnonKey
+                : "";
+
+            if (!window.supabase || !sbAnonKey) {
+                console.log("Supabase anon key not configured yet in appsettings.js.");
+                return;
+            }
+
+            try {
+                supabaseClient = window.supabase.createClient(sbUrl, sbAnonKey);
+
+                // Fetch latest shared portfolio from Supabase cloud
+                const { data, error } = await supabaseClient
+                    .from('portfolio')
+                    .select('data')
+                    .eq('id', 1)
+                    .maybeSingle();
+
+                if (data && data.data && typeof data.data === 'object') {
+                    console.log("Successfully fetched latest portfolio from Supabase cloud!");
+                    state = data.data;
+                    localStorage.setItem('family_wealth_state', JSON.stringify(state));
+                    initDashboard();
+                    isSupabaseConnected = true;
+                    updateDiskSyncBadge("Supabase Cloud Sync Active", true);
+                } else if (!error) {
+                    // Initialize cloud table with current state if empty
+                    await supabaseClient.from('portfolio').upsert({ id: 1, data: state, updated_at: new Date().toISOString() });
+                    isSupabaseConnected = true;
+                    updateDiskSyncBadge("Supabase Cloud Initialized", true);
+                }
+
+                // Subscribe to real-time updates across all open devices
+                supabaseClient
+                    .channel('public:portfolio')
+                    .on('postgres_changes', { event: '*', schema: 'public', table: 'portfolio', filter: 'id=eq.1' }, (payload) => {
+                        if (payload.new && payload.new.data) {
+                            console.log("Realtime event from Supabase received!");
+                            state = payload.new.data;
+                            localStorage.setItem('family_wealth_state', JSON.stringify(state));
+                            initDashboard();
+                            showNotificationBanner("🔄 Real-time portfolio update received from cloud!", false, null, 'fd');
+                        }
+                    })
+                    .subscribe();
+
+            } catch (err) {
+                console.warn("Supabase connection notice:", err);
+            }
+        }
+
+        async function saveToSupabaseCloud() {
+            if (!supabaseClient) return;
+            try {
+                const { error } = await supabaseClient
+                    .from('portfolio')
+                    .upsert({ id: 1, data: state, updated_at: new Date().toISOString() });
+                if (!error) {
+                    isSupabaseConnected = true;
+                    updateDiskSyncBadge("Saved to Supabase Cloud", true);
+                } else {
+                    console.warn("Supabase upsert notice:", error);
+                }
+            } catch (err) {
+                console.warn("Supabase save error:", err);
+            }
+        }
 
         function getApiSaveUrl() {
             return (window.location.protocol === 'http:' || window.location.protocol === 'https:')
@@ -2600,14 +2681,19 @@
             } catch (e) {
                 // Not running over local server (running standalone file:///)
                 isServerConnected = false;
-                if (!diskFileHandle) {
+                if (!diskFileHandle && !isSupabaseConnected) {
                     updateDiskSyncBadge("portfolio_data.json linked", true);
                 }
             }
         }
 
         async function autoSaveToDisk() {
-            // 1. If Local Node.js server is running (/api/save)
+            // 1. If Supabase Cloud Realtime is configured
+            if (supabaseClient) {
+                saveToSupabaseCloud();
+            }
+
+            // 2. If Local Node.js server is running (/api/save)
             try {
                 fetch(getApiSaveUrl(), {
                     method: 'POST',
@@ -2616,18 +2702,18 @@
                 }).then(res => {
                     if (res.ok) {
                         isServerConnected = true;
-                        updateDiskSyncBadge("Auto-saved to portfolio_data.json", true);
+                        if (!isSupabaseConnected) updateDiskSyncBadge("Auto-saved to portfolio_data.json", true);
                     }
                 }).catch(() => { });
             } catch (e) { }
 
-            // 2. If Native File System Access handle is active
+            // 3. If Native File System Access handle is active
             if (diskFileHandle) {
                 try {
                     const writable = await diskFileHandle.createWritable();
                     await writable.write(JSON.stringify(state, null, 2));
                     await writable.close();
-                    updateDiskSyncBadge(`Saved to ${diskFileHandle.name}`, true);
+                    if (!isSupabaseConnected) updateDiskSyncBadge(`Saved to ${diskFileHandle.name}`, true);
                 } catch (e) {
                     console.warn("Disk handle write warning:", e);
                 }
@@ -2635,7 +2721,14 @@
         }
 
         async function syncWithDiskFile() {
-            // 1. Try saving via local server first if available
+            // 1. If Supabase Cloud is configured
+            if (supabaseClient) {
+                await saveToSupabaseCloud();
+                showNotificationBanner("☁️ Successfully saved current portfolio directly to <strong>Supabase Cloud</strong>!", false, null, 'fd');
+                return;
+            }
+
+            // 2. Try saving via local server first if available
             try {
                 const res = await fetch(getApiSaveUrl(), {
                     method: 'POST',
@@ -2649,7 +2742,7 @@
                 }
             } catch (e) { }
 
-            // 2. Native File System Access API
+            // 3. Native File System Access API
             if ('showSaveFilePicker' in window) {
                 try {
                     diskFileHandle = await window.showSaveFilePicker({
