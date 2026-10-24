@@ -24,7 +24,7 @@ const APP_SETTINGS = {
     passcodeHint: "",
 
     /**
-     * Destination email for automated FD maturity, SIP reminders, and LIC premium due alerts
+     * Destination email for automated FD maturity, RD reminders, SIP reminders, and LIC premium due alerts
      */
     alertEmail: "midhunmoorthiyedam@gmail.com",
 

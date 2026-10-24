@@ -10,6 +10,7 @@ const PORTFOLIO_DATA = {
   "savings": 0,
   "fd": 0,
   "fds": [],
+  "rds": [],
   "lic": [],
   "mutualFunds": [],
   "stocks": []

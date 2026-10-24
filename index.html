@@ -254,9 +254,17 @@
                         <span class="hidden sm:inline">Refresh</span>
                     </button>
 
+                    <!-- Save / Sync JSON Button -->
+                    <button onclick="syncWithDiskFile()" id="header-sync-btn"
+                        class="bg-[#8FA28A] hover:bg-[#7D9178] active:scale-95 text-white text-xs px-3 sm:px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 font-bold shadow-xs cursor-pointer"
+                        title="Sync or Save Data directly to portfolio_data.json">
+                        <i class="fa-solid fa-floppy-disk text-xs"></i>
+                        <span>Save JSON</span>
+                    </button>
+
                     <!-- Lock Portal -->
                     <button onclick="lockApp()"
-                        class="text-xs bg-[#C8A96B]/15 text-[#967634] dark:text-[#C8A96B] hover:bg-[#C8A96B]/25 px-3 sm:px-3.5 py-2 rounded-xl border border-[#C8A96B]/35 transition flex items-center gap-1.5 font-bold shadow-xs active:scale-95"
+                        class="text-xs bg-[#C8A96B]/15 text-[#967634] dark:text-[#C8A96B] hover:bg-[#C8A96B]/25 px-3 sm:px-3.5 py-2 rounded-xl border border-[#C8A96B]/35 transition flex items-center gap-1.5 font-bold shadow-xs active:scale-95 cursor-pointer"
                         title="Lock Dashboard">
                         <i class="fa-solid fa-lock text-[#C8A96B] text-xs"></i>
                         <span class="hidden sm:inline">Lock Vault</span>
@@ -269,25 +277,33 @@
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6 sm:space-y-8 w-full flex-1">
 
             <!-- Live FD & Mutual Fund SIP Due Date Notification Alert Banner -->
-            <div id="fd-alert-banner" class="hidden relative p-4 rounded-2xl bg-gradient-to-r from-[#C8A96B]/25 via-[#C8A96B]/15 to-transparent border border-[#C8A96B]/50 text-[#1C241E] dark:text-[#F7F4ED] shadow-sm transition-all duration-300">
+            <div id="fd-alert-banner"
+                class="hidden relative p-4 rounded-2xl bg-gradient-to-r from-[#C8A96B]/25 via-[#C8A96B]/15 to-transparent border border-[#C8A96B]/50 text-[#1C241E] dark:text-[#F7F4ED] shadow-sm transition-all duration-300">
                 <div class="flex items-start sm:items-center justify-between gap-3">
                     <div class="flex items-center gap-3">
-                        <span class="w-9 h-9 rounded-xl bg-[#C8A96B] text-[#131714] flex items-center justify-center font-extrabold shrink-0 shadow-xs">
+                        <span
+                            class="w-9 h-9 rounded-xl bg-[#C8A96B] text-[#131714] flex items-center justify-center font-extrabold shrink-0 shadow-xs">
                             <i class="fa-solid fa-bell text-sm animate-bounce"></i>
                         </span>
                         <div>
-                            <h4 id="fd-alert-banner-title" class="font-extrabold text-xs sm:text-sm text-[#967634] dark:text-[#C8A96B]">Portfolio Alert Notice</h4>
-                            <div id="fd-alert-banner-text" class="text-xs text-[#1C241E] dark:text-[#F7F4ED] mt-0.5"></div>
+                            <h4 id="fd-alert-banner-title"
+                                class="font-extrabold text-xs sm:text-sm text-[#967634] dark:text-[#C8A96B]">Portfolio
+                                Alert Notice</h4>
+                            <div id="fd-alert-banner-text" class="text-xs text-[#1C241E] dark:text-[#F7F4ED] mt-0.5">
+                            </div>
                         </div>
                     </div>
-                    <button onclick="document.getElementById('fd-alert-banner').classList.add('hidden')" class="text-xs text-[#5E7060] hover:text-[#1C241E] dark:hover:text-white p-1 rounded-lg" title="Dismiss">
+                    <button onclick="document.getElementById('fd-alert-banner').classList.add('hidden')"
+                        class="text-xs text-[#5E7060] hover:text-[#1C241E] dark:hover:text-white p-1 rounded-lg"
+                        title="Dismiss">
                         <i class="fa-solid fa-xmark text-sm"></i>
                     </button>
                 </div>
             </div>
 
             <!-- Hidden Form & Iframe for Silent Email Dispatch to midhunmoorthiyedam@gmail.com without CORS issues -->
-            <iframe id="fd-email-iframe" name="fd-email-iframe" class="hidden" style="display:none; width:0; height:0; border:0;"></iframe>
+            <iframe id="fd-email-iframe" name="fd-email-iframe" class="hidden"
+                style="display:none; width:0; height:0; border:0;"></iframe>
             <form id="fd-email-form" method="POST" target="fd-email-iframe" class="hidden" style="display:none;">
                 <input type="hidden" name="_subject" id="fd-email-subject">
                 <input type="hidden" name="_captcha" value="false">
@@ -374,10 +390,10 @@
                                     <div>
                                         <span
                                             class="text-xs sm:text-sm font-bold text-[#1C241E] dark:text-[#F7F4ED]">Safe
-                                            Assets (Bank, FD & LIC)</span>
+                                            Assets (Bank, FD, RD & LIC)</span>
                                         <span
                                             class="text-[11px] text-[#5E7060] dark:text-[#A4B5A3] ml-1.5 hidden sm:inline">•
-                                            Cash, Deposits & Life Cover</span>
+                                            Cash, Deposits, Recurring & Cover</span>
                                     </div>
                                 </div>
                                 <div class="text-right">
@@ -525,7 +541,7 @@
                     <div class="flex items-center justify-between">
                         <p
                             class="text-[11px] font-bold text-[#5E7060] dark:text-[#A4B5A3] uppercase tracking-wider truncate mr-1">
-                            Safe Assets (Bank, FD & LIC)</p>
+                            Safe Assets (Bank, FD, RD & LIC)</p>
                         <span
                             class="w-9 h-9 rounded-xl bg-[#C7D3C0]/30 text-[#4D5E4F] dark:text-[#C7D3C0] flex items-center justify-center text-sm border border-[#C7D3C0] shadow-xs shrink-0 group-hover:scale-105 transition-transform">
                             <i class="fa-solid fa-vault"></i>
@@ -536,7 +552,7 @@
                             class="text-3xl sm:text-4xl font-extrabold text-[#1C241E] dark:text-[#F7F4ED] tracking-tight tabular-nums break-all sm:break-normal">
                             ₹0</h3>
                         <span class="text-[#5E7060] dark:text-[#A4B5A3] text-[11px] font-semibold mt-2 block">Bank
-                            Accounts, Deposits & Cover</span>
+                            Accounts, FDs, RDs & Cover</span>
                     </div>
                 </div>
 
@@ -630,8 +646,10 @@
                                     <i class="fa-solid fa-building-columns"></i>
                                 </div>
                                 <div>
-                                    <h2 class="font-bold text-base text-[#1C241E] dark:text-[#F7F4ED]">Bank Accounts & Fixed Deposits (FD)</h2>
-                                    <p class="text-[11px] text-[#5E7060] dark:text-[#A4B5A3]">Liquid savings & auto-alert fixed deposits</p>
+                                    <h2 class="font-bold text-base text-[#1C241E] dark:text-[#F7F4ED]">Bank Accounts &
+                                        Fixed Deposits (FD)</h2>
+                                    <p class="text-[11px] text-[#5E7060] dark:text-[#A4B5A3]">Liquid savings &
+                                        auto-alert fixed deposits</p>
                                 </div>
                             </div>
                             <button type="button" onclick="addFDRow()"
@@ -644,8 +662,10 @@
                         <!-- Savings Account Field -->
                         <div class="mb-5 pb-4 border-b border-[#C7D3C0]/50 dark:border-[#8FA28A]/15">
                             <div class="flex items-center justify-between mb-1.5">
-                                <label class="block text-xs text-[#5E7060] dark:text-[#A4B5A3] font-semibold">Savings Accounts Balance (₹)</label>
-                                <span class="text-[10px] text-[#5E7060]/70 dark:text-[#A4B5A3]/70 font-medium">All Bank Accounts</span>
+                                <label class="block text-xs text-[#5E7060] dark:text-[#A4B5A3] font-semibold">Savings
+                                    Accounts Balance (₹)</label>
+                                <span class="text-[10px] text-[#5E7060]/70 dark:text-[#A4B5A3]/70 font-medium">All Bank
+                                    Accounts</span>
                             </div>
                             <input type="number" id="savings-amt" oninput="saveAndRecalculate()"
                                 class="w-full bg-[#F7F4ED]/80 dark:bg-[#131714]/80 border border-[#C7D3C0] dark:border-[#8FA28A]/25 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-[#1C241E] dark:text-[#F7F4ED] placeholder-[#5E7060]/50 focus:outline-none focus:border-[#8FA28A] focus:ring-4 focus:ring-[#8FA28A]/15 transition tabular-nums"
@@ -653,14 +673,19 @@
                         </div>
 
                         <!-- In-Card Alert Notification Notice -->
-                        <div id="fd-card-alert-box" class="hidden mb-4 p-3.5 rounded-xl bg-[#C8A96B]/20 border border-[#C8A96B]/40 text-xs text-[#1C241E] dark:text-[#F7F4ED] flex items-center justify-between gap-3 shadow-xs transition-all">
+                        <div id="fd-card-alert-box"
+                            class="hidden mb-4 p-3.5 rounded-xl bg-[#C8A96B]/20 border border-[#C8A96B]/40 text-xs text-[#1C241E] dark:text-[#F7F4ED] flex items-center justify-between gap-3 shadow-xs transition-all">
                             <div class="flex items-center gap-2.5 min-w-0">
-                                <span class="w-7 h-7 rounded-lg bg-[#C8A96B] text-[#131714] flex items-center justify-center font-bold shrink-0">
+                                <span
+                                    class="w-7 h-7 rounded-lg bg-[#C8A96B] text-[#131714] flex items-center justify-center font-bold shrink-0">
                                     <i class="fa-solid fa-envelope text-xs"></i>
                                 </span>
-                                <div id="fd-card-alert-text" class="truncate sm:whitespace-normal font-medium text-[11px] sm:text-xs"></div>
+                                <div id="fd-card-alert-text"
+                                    class="truncate sm:whitespace-normal font-medium text-[11px] sm:text-xs"></div>
                             </div>
-                            <button onclick="document.getElementById('fd-card-alert-box').classList.add('hidden')" class="text-[#5E7060] hover:text-[#1C241E] dark:hover:text-white p-1 shrink-0" title="Dismiss">
+                            <button onclick="document.getElementById('fd-card-alert-box').classList.add('hidden')"
+                                class="text-[#5E7060] hover:text-[#1C241E] dark:hover:text-white p-1 shrink-0"
+                                title="Dismiss">
                                 <i class="fa-solid fa-xmark text-xs"></i>
                             </button>
                         </div>
@@ -669,8 +694,11 @@
                         <div>
                             <div class="flex flex-wrap items-center justify-between gap-2 mb-2.5">
                                 <div class="flex items-center gap-2">
-                                    <span class="text-xs font-bold text-[#1C241E] dark:text-[#F7F4ED]">Fixed Deposit Records</span>
-                                    <span id="fd-total-pill" class="text-[11px] font-extrabold text-[#4D5E4F] dark:text-[#C7D3C0] bg-[#C7D3C0]/30 px-2 py-0.5 rounded-md tabular-nums">Total: ₹0</span>
+                                    <span class="text-xs font-bold text-[#1C241E] dark:text-[#F7F4ED]">Fixed Deposit
+                                        Records</span>
+                                    <span id="fd-total-pill"
+                                        class="text-[11px] font-extrabold text-[#4D5E4F] dark:text-[#C7D3C0] bg-[#C7D3C0]/30 px-2 py-0.5 rounded-md tabular-nums">Total:
+                                        ₹0</span>
                                 </div>
                                 <span class="text-[10px] text-[#5E7060] dark:text-[#A4B5A3] flex items-center gap-1">
                                     <i class="fa-solid fa-envelope text-[9px] text-[#8FA28A]"></i>
@@ -681,7 +709,8 @@
                             <div class="overflow-x-auto -mx-5 px-5 sm:mx-0 sm:px-0">
                                 <table class="w-full text-left text-xs min-w-[500px]">
                                     <thead>
-                                        <tr class="text-[#5E7060] dark:text-[#A4B5A3] border-b border-[#C7D3C0] dark:border-[#8FA28A]/20 text-[10px] uppercase tracking-wider">
+                                        <tr
+                                            class="text-[#5E7060] dark:text-[#A4B5A3] border-b border-[#C7D3C0] dark:border-[#8FA28A]/20 text-[10px] uppercase tracking-wider">
                                             <th class="pb-2 font-bold min-w-[130px]">Bank Name</th>
                                             <th class="pb-2 font-bold w-28">Amount (₹)</th>
                                             <th class="pb-2 font-bold min-w-[130px]">Maturity Due Date</th>
@@ -689,11 +718,79 @@
                                             <th class="pb-2 w-8"></th>
                                         </tr>
                                     </thead>
-                                    <tbody id="fd-table-body" class="divide-y divide-[#C7D3C0]/50 dark:divide-[#8FA28A]/15">
+                                    <tbody id="fd-table-body"
+                                        class="divide-y divide-[#C7D3C0]/50 dark:divide-[#8FA28A]/15">
                                         <!-- Injected via renderFDRows() -->
                                     </tbody>
                                 </table>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Recurring Deposits (RD) Tracker -->
+                    <div
+                        class="bg-[#FCFAF6]/90 dark:bg-[#1A201B]/90 backdrop-blur-xl border border-[#C7D3C0]/80 dark:border-[#8FA28A]/20 p-5 sm:p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                        <div
+                            class="flex flex-wrap items-center justify-between gap-2.5 mb-5 pb-3 border-b border-[#C7D3C0]/60 dark:border-[#8FA28A]/15">
+                            <div class="flex items-center gap-2.5">
+                                <div
+                                    class="w-9 h-9 rounded-xl bg-[#8FA28A]/15 text-[#5A6D58] dark:text-[#8FA28A] flex items-center justify-center border border-[#8FA28A]/30 shadow-xs">
+                                    <i class="fa-solid fa-piggy-bank"></i>
+                                </div>
+                                <div>
+                                    <h2 class="font-bold text-base text-[#1C241E] dark:text-[#F7F4ED]">Recurring Deposits (RD)</h2>
+                                    <p class="text-[11px] text-[#5E7060] dark:text-[#A4B5A3]">Monthly recurring savings & automated due alerts</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <span id="rd-balance-pill"
+                                    class="text-[11px] font-extrabold text-[#4D5E4F] dark:text-[#C7D3C0] bg-[#C7D3C0]/30 px-2.5 py-1 rounded-xl tabular-nums">Balance: ₹0</span>
+                                <span id="rd-monthly-pill"
+                                    class="text-[11px] font-extrabold text-[#967634] dark:text-[#C8A96B] bg-[#C8A96B]/20 border border-[#C8A96B]/35 px-2.5 py-1 rounded-xl tabular-nums">Monthly: ₹0/mo</span>
+                                <button type="button" onclick="addRDRow()"
+                                    class="text-xs bg-[#8FA28A] hover:bg-[#7D9178] active:scale-95 text-white px-3.5 py-1.5 rounded-xl transition duration-200 flex items-center gap-1.5 font-bold shadow-xs">
+                                    <i class="fa-solid fa-plus text-[10px]"></i>
+                                    <span>Add RD</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- In-Card Alert Notification Notice for Recurring Deposits -->
+                        <div id="rd-card-alert-box"
+                            class="hidden mb-4 p-3.5 rounded-xl bg-[#C8A96B]/20 border border-[#C8A96B]/40 text-xs text-[#1C241E] dark:text-[#F7F4ED] flex items-center justify-between gap-3 shadow-xs transition-all">
+                            <div class="flex items-center gap-2.5 min-w-0">
+                                <span
+                                    class="w-7 h-7 rounded-lg bg-[#C8A96B] text-[#131714] flex items-center justify-center font-bold shrink-0">
+                                    <i class="fa-solid fa-bell text-xs"></i>
+                                </span>
+                                <div id="rd-card-alert-text"
+                                    class="truncate sm:whitespace-normal font-medium text-[11px] sm:text-xs"></div>
+                            </div>
+                            <button onclick="document.getElementById('rd-card-alert-box').classList.add('hidden')"
+                                class="text-[#5E7060] hover:text-[#1C241E] dark:hover:text-white p-1 shrink-0"
+                                title="Dismiss">
+                                <i class="fa-solid fa-xmark text-xs"></i>
+                            </button>
+                        </div>
+
+                        <div class="overflow-x-auto -mx-5 px-5 sm:mx-0 sm:px-0">
+                            <table class="w-full text-left text-xs min-w-[650px]">
+                                <thead>
+                                    <tr
+                                        class="text-[#5E7060] dark:text-[#A4B5A3] border-b border-[#C7D3C0] dark:border-[#8FA28A]/20 text-[10px] uppercase tracking-wider">
+                                        <th class="pb-2.5 font-bold min-w-[130px]">Bank / Institution</th>
+                                        <th class="pb-2.5 font-bold w-24">Monthly (₹)</th>
+                                        <th class="pb-2.5 font-bold w-24">Balance (₹)</th>
+                                        <th class="pb-2.5 font-bold min-w-[125px]">Installment Due Date</th>
+                                        <th class="pb-2.5 font-bold min-w-[110px]">Status & Alert</th>
+                                        <th class="pb-2.5 w-8"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="rd-table-body"
+                                    class="divide-y divide-[#C7D3C0]/50 dark:divide-[#8FA28A]/15">
+                                    <!-- Injected via renderRDRows() -->
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
@@ -708,13 +805,19 @@
                                     <i class="fa-solid fa-shield-halved"></i>
                                 </div>
                                 <div>
-                                    <h2 class="font-bold text-base text-[#1C241E] dark:text-[#F7F4ED]">LIC & Life Insurance Policies</h2>
-                                    <p class="text-[11px] text-[#5E7060] dark:text-[#A4B5A3]">Policy cover & automated premium due alerts</p>
+                                    <h2 class="font-bold text-base text-[#1C241E] dark:text-[#F7F4ED]">LIC & Life
+                                        Insurance Policies</h2>
+                                    <p class="text-[11px] text-[#5E7060] dark:text-[#A4B5A3]">Policy cover & automated
+                                        premium due alerts</p>
                                 </div>
                             </div>
                             <div class="flex items-center gap-2 flex-wrap">
-                                <span id="lic-sum-pill" class="text-[11px] font-extrabold text-[#4D5E4F] dark:text-[#C7D3C0] bg-[#C7D3C0]/30 px-2.5 py-1 rounded-xl tabular-nums">Cover: ₹0</span>
-                                <span id="lic-premium-pill" class="text-[11px] font-extrabold text-[#967634] dark:text-[#C8A96B] bg-[#C8A96B]/20 border border-[#C8A96B]/35 px-2.5 py-1 rounded-xl tabular-nums">Premium: ₹0/yr</span>
+                                <span id="lic-sum-pill"
+                                    class="text-[11px] font-extrabold text-[#4D5E4F] dark:text-[#C7D3C0] bg-[#C7D3C0]/30 px-2.5 py-1 rounded-xl tabular-nums">Cover:
+                                    ₹0</span>
+                                <span id="lic-premium-pill"
+                                    class="text-[11px] font-extrabold text-[#967634] dark:text-[#C8A96B] bg-[#C8A96B]/20 border border-[#C8A96B]/35 px-2.5 py-1 rounded-xl tabular-nums">Premium:
+                                    ₹0/yr</span>
                                 <button type="button" onclick="addLICRow()"
                                     class="text-xs bg-[#8FA28A] hover:bg-[#7D9178] active:scale-95 text-white px-3.5 py-1.5 rounded-xl transition duration-200 flex items-center gap-1.5 font-bold shadow-xs">
                                     <i class="fa-solid fa-plus text-[10px]"></i>
@@ -724,14 +827,19 @@
                         </div>
 
                         <!-- In-Card Alert Notification Notice for LIC Policies -->
-                        <div id="lic-card-alert-box" class="hidden mb-4 p-3.5 rounded-xl bg-[#C8A96B]/20 border border-[#C8A96B]/40 text-xs text-[#1C241E] dark:text-[#F7F4ED] flex items-center justify-between gap-3 shadow-xs transition-all">
+                        <div id="lic-card-alert-box"
+                            class="hidden mb-4 p-3.5 rounded-xl bg-[#C8A96B]/20 border border-[#C8A96B]/40 text-xs text-[#1C241E] dark:text-[#F7F4ED] flex items-center justify-between gap-3 shadow-xs transition-all">
                             <div class="flex items-center gap-2.5 min-w-0">
-                                <span class="w-7 h-7 rounded-lg bg-[#C8A96B] text-[#131714] flex items-center justify-center font-bold shrink-0">
+                                <span
+                                    class="w-7 h-7 rounded-lg bg-[#C8A96B] text-[#131714] flex items-center justify-center font-bold shrink-0">
                                     <i class="fa-solid fa-bell text-xs"></i>
                                 </span>
-                                <div id="lic-card-alert-text" class="truncate sm:whitespace-normal font-medium text-[11px] sm:text-xs"></div>
+                                <div id="lic-card-alert-text"
+                                    class="truncate sm:whitespace-normal font-medium text-[11px] sm:text-xs"></div>
                             </div>
-                            <button onclick="document.getElementById('lic-card-alert-box').classList.add('hidden')" class="text-[#5E7060] hover:text-[#1C241E] dark:hover:text-white p-1 shrink-0" title="Dismiss">
+                            <button onclick="document.getElementById('lic-card-alert-box').classList.add('hidden')"
+                                class="text-[#5E7060] hover:text-[#1C241E] dark:hover:text-white p-1 shrink-0"
+                                title="Dismiss">
                                 <i class="fa-solid fa-xmark text-xs"></i>
                             </button>
                         </div>
@@ -739,7 +847,8 @@
                         <div class="overflow-x-auto -mx-5 px-5 sm:mx-0 sm:px-0">
                             <table class="w-full text-left text-xs min-w-[700px]">
                                 <thead>
-                                    <tr class="text-[#5E7060] dark:text-[#A4B5A3] border-b border-[#C7D3C0] dark:border-[#8FA28A]/20 text-[10px] uppercase tracking-wider">
+                                    <tr
+                                        class="text-[#5E7060] dark:text-[#A4B5A3] border-b border-[#C7D3C0] dark:border-[#8FA28A]/20 text-[10px] uppercase tracking-wider">
                                         <th class="pb-2.5 font-bold min-w-[130px]">Policy / Plan Name</th>
                                         <th class="pb-2.5 font-bold w-24">Policy No.</th>
                                         <th class="pb-2.5 font-bold w-24">Premium (₹)</th>
@@ -749,7 +858,8 @@
                                         <th class="pb-2.5 w-8"></th>
                                     </tr>
                                 </thead>
-                                <tbody id="lic-table-body" class="divide-y divide-[#C7D3C0]/50 dark:divide-[#8FA28A]/15">
+                                <tbody id="lic-table-body"
+                                    class="divide-y divide-[#C7D3C0]/50 dark:divide-[#8FA28A]/15">
                                     <!-- Injected via renderLICRows() -->
                                 </tbody>
                             </table>
@@ -784,14 +894,14 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
                             <!-- Direct Disk Save / Sync Button -->
                             <button type="button" onclick="syncWithDiskFile()"
-                                class="w-full bg-[#8FA28A] hover:bg-[#7D9178] active:scale-[0.98] text-white text-xs py-2.5 px-3 rounded-xl transition duration-200 flex items-center justify-center gap-2 font-bold shadow-xs">
+                                class="w-full bg-[#8FA28A] hover:bg-[#7D9178] active:scale-[0.98] text-white text-xs py-2.5 px-3 rounded-xl transition duration-200 flex items-center justify-center gap-2 font-bold shadow-xs cursor-pointer">
                                 <i class="fa-solid fa-floppy-disk text-xs"></i>
                                 <span>Save to Disk JSON</span>
                             </button>
 
                             <!-- Download Backup Button -->
                             <button type="button" onclick="exportData()"
-                                class="w-full bg-[#F7F4ED] dark:bg-[#131714] hover:bg-[#EDE8DC] dark:hover:bg-[#202721] active:scale-[0.98] border border-[#C7D3C0] dark:border-[#8FA28A]/25 text-xs py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-2 text-[#1C241E] dark:text-[#F7F4ED] font-bold shadow-xs hover:border-[#8FA28A]/50">
+                                class="w-full bg-[#F7F4ED] dark:bg-[#131714] hover:bg-[#EDE8DC] dark:hover:bg-[#202721] active:scale-[0.98] border border-[#C7D3C0] dark:border-[#8FA28A]/25 text-xs py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-2 text-[#1C241E] dark:text-[#F7F4ED] font-bold shadow-xs hover:border-[#8FA28A]/50 cursor-pointer">
                                 <i class="fa-solid fa-file-arrow-down text-xs text-[#8FA28A]"></i>
                                 <span>Export Backup JSON</span>
                             </button>
@@ -801,7 +911,7 @@
                         <div class="pt-1">
                             <input type="file" id="import-json-input" accept=".json" class="hidden" onchange="importDataFromFile(event)">
                             <button type="button" onclick="document.getElementById('import-json-input').click()"
-                                class="w-full bg-[#FCFAF6] dark:bg-[#1A201B] hover:bg-[#8FA28A]/10 active:scale-[0.98] border border-dashed border-[#C7D3C0] dark:border-[#8FA28A]/35 text-xs py-2 px-3 rounded-xl transition flex items-center justify-center gap-2 text-[#5E7060] dark:text-[#A4B5A3] font-semibold hover:text-[#1C241E] dark:hover:text-[#F7F4ED]">
+                                class="w-full bg-[#FCFAF6] dark:bg-[#1A201B] hover:bg-[#8FA28A]/10 active:scale-[0.98] border border-dashed border-[#C7D3C0] dark:border-[#8FA28A]/35 text-xs py-2 px-3 rounded-xl transition flex items-center justify-center gap-2 text-[#5E7060] dark:text-[#A4B5A3] font-semibold hover:text-[#1C241E] dark:hover:text-[#F7F4ED] cursor-pointer">
                                 <i class="fa-solid fa-file-arrow-up text-xs text-[#C8A96B]"></i>
                                 <span>Import / Restore from JSON File</span>
                             </button>
@@ -824,13 +934,19 @@
                                     <i class="fa-solid fa-arrow-trend-up"></i>
                                 </div>
                                 <div>
-                                    <h2 class="font-bold text-base text-[#1C241E] dark:text-[#F7F4ED]">Mutual Funds & SIP Portfolio</h2>
-                                    <p class="text-[11px] text-[#5E7060] dark:text-[#A4B5A3]">Live NAV tracking & automated monthly SIP due alerts</p>
+                                    <h2 class="font-bold text-base text-[#1C241E] dark:text-[#F7F4ED]">Mutual Funds &
+                                        SIP Portfolio</h2>
+                                    <p class="text-[11px] text-[#5E7060] dark:text-[#A4B5A3]">Live NAV tracking &
+                                        automated monthly SIP due alerts</p>
                                 </div>
                             </div>
                             <div class="flex items-center gap-2 flex-wrap">
-                                <span id="mf-total-pill" class="text-[11px] font-extrabold text-[#4D5E4F] dark:text-[#C7D3C0] bg-[#C7D3C0]/30 px-2.5 py-1 rounded-xl tabular-nums">Total: ₹0</span>
-                                <span id="mf-sip-pill" class="text-[11px] font-extrabold text-[#967634] dark:text-[#C8A96B] bg-[#C8A96B]/20 border border-[#C8A96B]/35 px-2.5 py-1 rounded-xl tabular-nums">SIP: ₹0/mo</span>
+                                <span id="mf-total-pill"
+                                    class="text-[11px] font-extrabold text-[#4D5E4F] dark:text-[#C7D3C0] bg-[#C7D3C0]/30 px-2.5 py-1 rounded-xl tabular-nums">Total:
+                                    ₹0</span>
+                                <span id="mf-sip-pill"
+                                    class="text-[11px] font-extrabold text-[#967634] dark:text-[#C8A96B] bg-[#C8A96B]/20 border border-[#C8A96B]/35 px-2.5 py-1 rounded-xl tabular-nums">SIP:
+                                    ₹0/mo</span>
                                 <button type="button" onclick="addMFRow()"
                                     class="text-xs bg-[#8FA28A] hover:bg-[#7D9178] active:scale-95 text-white px-3.5 py-1.5 rounded-xl transition duration-200 flex items-center gap-1.5 font-bold shadow-xs">
                                     <i class="fa-solid fa-plus text-[10px]"></i>
@@ -840,14 +956,19 @@
                         </div>
 
                         <!-- In-Card Alert Notification Notice for Mutual Funds SIP -->
-                        <div id="mf-card-alert-box" class="hidden mb-4 p-3.5 rounded-xl bg-[#8FA28A]/20 border border-[#8FA28A]/40 text-xs text-[#1C241E] dark:text-[#F7F4ED] flex items-center justify-between gap-3 shadow-xs transition-all">
+                        <div id="mf-card-alert-box"
+                            class="hidden mb-4 p-3.5 rounded-xl bg-[#8FA28A]/20 border border-[#8FA28A]/40 text-xs text-[#1C241E] dark:text-[#F7F4ED] flex items-center justify-between gap-3 shadow-xs transition-all">
                             <div class="flex items-center gap-2.5 min-w-0">
-                                <span class="w-7 h-7 rounded-lg bg-[#8FA28A] text-white flex items-center justify-center font-bold shrink-0">
+                                <span
+                                    class="w-7 h-7 rounded-lg bg-[#8FA28A] text-white flex items-center justify-center font-bold shrink-0">
                                     <i class="fa-solid fa-bell text-xs"></i>
                                 </span>
-                                <div id="mf-card-alert-text" class="truncate sm:whitespace-normal font-medium text-[11px] sm:text-xs"></div>
+                                <div id="mf-card-alert-text"
+                                    class="truncate sm:whitespace-normal font-medium text-[11px] sm:text-xs"></div>
                             </div>
-                            <button onclick="document.getElementById('mf-card-alert-box').classList.add('hidden')" class="text-[#5E7060] hover:text-[#1C241E] dark:hover:text-white p-1 shrink-0" title="Dismiss">
+                            <button onclick="document.getElementById('mf-card-alert-box').classList.add('hidden')"
+                                class="text-[#5E7060] hover:text-[#1C241E] dark:hover:text-white p-1 shrink-0"
+                                title="Dismiss">
                                 <i class="fa-solid fa-xmark text-xs"></i>
                             </button>
                         </div>
@@ -1057,6 +1178,7 @@
                 savings: 0,
                 fd: 0,
                 fds: [],
+                rds: [],
                 lic: [],
                 mutualFunds: [],
                 stocks: []
@@ -1083,6 +1205,19 @@
                     lastAlertSent: null
                 });
             }
+        }
+
+        // Backward compatibility migration for RDs (Recurring Deposits)
+        if (!state.rds) {
+            state.rds = [];
+        } else if (Array.isArray(state.rds)) {
+            state.rds.forEach(r => {
+                if (r.bank === undefined) r.bank = '';
+                if (r.monthlyAmount === undefined) r.monthlyAmount = 0;
+                if (r.balance === undefined) r.balance = 0;
+                if (r.dueDate === undefined) r.dueDate = '';
+                if (r.lastAlertSent === undefined) r.lastAlertSent = null;
+            });
         }
 
         // Backward compatibility migration for LIC Policies
@@ -1115,12 +1250,14 @@
             document.getElementById('gold-grams').value = state.goldGrams || '';
             document.getElementById('savings-amt').value = state.savings || '';
             renderFDRows();
+            renderRDRows();
             renderLICRows();
             renderMFRows();
             renderStockRows();
             await fetchLiveMarketData();
             recalculateAll();
             checkFDDueDates();
+            checkRDDueDates();
             checkSIPDueDates();
             checkLICDueDates();
             checkLocalServerConnection();
@@ -1198,6 +1335,21 @@
             const fdPill = document.getElementById('fd-total-pill');
             if (fdPill) fdPill.innerText = `Total: ₹${fdTotal.toLocaleString('en-IN', { maximumFractionDigits: 0 })}`;
 
+            let rdBalanceTotal = 0;
+            let rdMonthlyTotal = 0;
+            if (state.rds && state.rds.length > 0) {
+                state.rds.forEach((rd) => {
+                    rdBalanceTotal += (parseFloat(rd.balance) || 0);
+                    rdMonthlyTotal += (parseFloat(rd.monthlyAmount) || 0);
+                });
+            }
+
+            const rdBalancePill = document.getElementById('rd-balance-pill');
+            if (rdBalancePill) rdBalancePill.innerText = `Balance: ₹${rdBalanceTotal.toLocaleString('en-IN', { maximumFractionDigits: 0 })}`;
+
+            const rdMonthlyPill = document.getElementById('rd-monthly-pill');
+            if (rdMonthlyPill) rdMonthlyPill.innerText = `Monthly: ₹${rdMonthlyTotal.toLocaleString('en-IN', { maximumFractionDigits: 0 })}/mo`;
+
             let licSumTotal = 0;
             let licPremiumTotal = 0;
             if (state.lic && state.lic.length > 0) {
@@ -1213,7 +1365,7 @@
             const licPremiumPill = document.getElementById('lic-premium-pill');
             if (licPremiumPill) licPremiumPill.innerText = `Premium: ₹${licPremiumTotal.toLocaleString('en-IN', { maximumFractionDigits: 0 })}/yr`;
 
-            const safeTotal = state.savings + state.fd + licSumTotal;
+            const safeTotal = state.savings + state.fd + rdBalanceTotal + licSumTotal;
             const investTotal = mfTotal + stockTotal;
             const netWorth = safeTotal + investTotal + goldVal;
 
@@ -1261,7 +1413,7 @@
             const banner = document.getElementById('fd-alert-banner');
             const textEl = document.getElementById('fd-alert-banner-text');
             const titleEl = document.getElementById('fd-alert-banner-title');
-            
+
             let cardBox, cardText;
             if (targetCategory === 'mf') {
                 cardBox = document.getElementById('mf-card-alert-box');
@@ -1269,6 +1421,9 @@
             } else if (targetCategory === 'lic') {
                 cardBox = document.getElementById('lic-card-alert-box');
                 cardText = document.getElementById('lic-card-alert-text');
+            } else if (targetCategory === 'rd') {
+                cardBox = document.getElementById('rd-card-alert-box');
+                cardText = document.getElementById('rd-card-alert-text');
             } else {
                 cardBox = document.getElementById('fd-card-alert-box');
                 cardText = document.getElementById('fd-card-alert-text');
@@ -1285,6 +1440,8 @@
                         titleEl.innerText = "Mutual Fund SIP Due Notice";
                     } else if (targetCategory === 'lic') {
                         titleEl.innerText = "LIC Policy Premium Due Notice";
+                    } else if (targetCategory === 'rd') {
+                        titleEl.innerText = "Recurring Deposit (RD) Due Notice";
                     } else {
                         titleEl.innerText = "Fixed Deposit Maturity Notice";
                     }
@@ -1317,8 +1474,8 @@
                 }
             }
 
-            const alertSentNotice = (fd && fd.lastAlertSent) 
-                ? `<span class="text-[9px] text-[#5E7060]/80 dark:text-[#A4B5A3]/80 block mt-0.5" title="Alert dispatched on ${fd.lastAlertSent}"><i class="fa-solid fa-check-double text-[#8FA28A]"></i> Alerted ${new Date(fd.lastAlertSent).toLocaleDateString()}</span>` 
+            const alertSentNotice = (fd && fd.lastAlertSent)
+                ? `<span class="text-[9px] text-[#5E7060]/80 dark:text-[#A4B5A3]/80 block mt-0.5" title="Alert dispatched on ${fd.lastAlertSent}"><i class="fa-solid fa-check-double text-[#8FA28A]"></i> Alerted ${new Date(fd.lastAlertSent).toLocaleDateString()}</span>`
                 : '';
 
             return `<div>${statusBadge}${alertSentNotice}</div>`;
@@ -1476,7 +1633,7 @@
                         _template: "table",
                         _captcha: "false"
                     })
-                }).catch(() => {});
+                }).catch(() => { });
             } catch (err) {
                 // Ignore background fetch failure, form submission handles delivery
             }
@@ -1513,6 +1670,256 @@
             });
         }
 
+        // Generate status badge HTML for a Recurring Deposit (RD)
+        function getRDStatusBadgeHtml(rd) {
+            const today = new Date().toISOString().split('T')[0];
+            let statusBadge = `<span class="px-2 py-0.5 rounded-md text-[10px] font-semibold text-[#5E7060]/70 dark:text-[#A4B5A3]/60 bg-black/5 dark:bg-white/5">No date set</span>`;
+
+            if (rd && rd.dueDate) {
+                const diffMs = new Date(rd.dueDate + "T00:00:00") - new Date(today + "T00:00:00");
+                const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
+
+                if (diffDays < 0) {
+                    statusBadge = `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold bg-[#C8A96B]/25 text-[#967634] dark:text-[#C8A96B] border border-[#C8A96B]/40"><i class="fa-solid fa-clock-rotate-left text-[9px]"></i> RD Overdue (${Math.abs(diffDays)}d)</span>`;
+                } else if (diffDays === 0) {
+                    statusBadge = `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold bg-[#8FA28A]/25 text-[#5A6D58] dark:text-[#8FA28A] border border-[#8FA28A]/40 animate-pulse"><i class="fa-solid fa-bell text-[9px]"></i> RD Due Today!</span>`;
+                } else {
+                    statusBadge = `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-semibold text-[#5A6D58] dark:text-[#A4B5A3] bg-[#8FA28A]/15"><i class="fa-regular fa-calendar-check text-[9px]"></i> ${diffDays}d left</span>`;
+                }
+            }
+
+            const alertSentNotice = (rd && rd.lastAlertSent)
+                ? `<span class="text-[9px] text-[#5E7060]/80 dark:text-[#A4B5A3]/80 block mt-0.5" title="Alert dispatched on ${rd.lastAlertSent}"><i class="fa-solid fa-check-double text-[#8FA28A]"></i> Alerted ${new Date(rd.lastAlertSent).toLocaleDateString()}</span>`
+                : '';
+
+            return `<div>${statusBadge}${alertSentNotice}</div>`;
+        }
+
+        function updateRDRowBadge(idx) {
+            const badgeEl = document.getElementById(`rd-badge-box-${idx}`);
+            if (badgeEl && state.rds && state.rds[idx]) {
+                badgeEl.innerHTML = getRDStatusBadgeHtml(state.rds[idx]);
+            }
+        }
+
+        // Dynamic Recurring Deposits (RD) Management
+        function renderRDRows() {
+            const tbody = document.getElementById('rd-table-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            if (!state.rds || state.rds.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="py-6 text-center text-[#5E7060]/70 dark:text-[#A4B5A3]/60 font-medium">
+                            <i class="fa-solid fa-piggy-bank text-base mb-1 block opacity-40"></i>
+                            No recurring deposits recorded yet. Click <span class="text-[#8FA28A] font-bold cursor-pointer" onclick="addRDRow()">+ Add RD</span> above.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            state.rds.forEach((rd, idx) => {
+                const badgeMarkup = getRDStatusBadgeHtml(rd);
+
+                tbody.innerHTML += `
+                    <tr class="hover:bg-black/[0.02] dark:hover:bg-white/[0.03] transition-colors" id="rd-row-${idx}">
+                        <td class="py-2.5 pr-2 min-w-[130px]">
+                            <input type="text" value="${rd.bank || ''}" placeholder="e.g. SBI Recurring Deposit" oninput="updateRDField(${idx}, 'bank', this.value)"
+                                class="bg-[#F7F4ED]/80 dark:bg-[#131714]/80 border border-[#C7D3C0] dark:border-[#8FA28A]/25 focus:border-[#8FA28A] focus:ring-2 focus:ring-[#8FA28A]/15 rounded-xl px-2.5 py-1.5 w-full text-[#1C241E] dark:text-[#F7F4ED] text-xs font-semibold focus:outline-none transition">
+                        </td>
+                        <td class="py-2.5 px-2 w-24 min-w-[85px]">
+                            <input type="number" value="${rd.monthlyAmount !== undefined && rd.monthlyAmount !== null ? rd.monthlyAmount : ''}" placeholder="0" oninput="updateRDField(${idx}, 'monthlyAmount', this.value)"
+                                class="bg-[#F7F4ED]/80 dark:bg-[#131714]/80 border border-[#C7D3C0] dark:border-[#8FA28A]/25 focus:border-[#8FA28A] focus:ring-2 focus:ring-[#8FA28A]/15 rounded-xl px-2.5 py-1.5 w-full text-[#1C241E] dark:text-[#F7F4ED] text-xs font-semibold focus:outline-none transition tabular-nums" title="Monthly Installment (₹)">
+                        </td>
+                        <td class="py-2.5 px-2 w-24 min-w-[85px]">
+                            <input type="number" value="${rd.balance !== undefined && rd.balance !== null ? rd.balance : ''}" placeholder="0" oninput="updateRDField(${idx}, 'balance', this.value)"
+                                class="bg-[#F7F4ED]/80 dark:bg-[#131714]/80 border border-[#C7D3C0] dark:border-[#8FA28A]/25 focus:border-[#8FA28A] focus:ring-2 focus:ring-[#8FA28A]/15 rounded-xl px-2.5 py-1.5 w-full text-[#1C241E] dark:text-[#F7F4ED] text-xs font-semibold focus:outline-none transition tabular-nums" title="Accumulated Balance (₹)">
+                        </td>
+                        <td class="py-2.5 px-2 min-w-[125px]">
+                            <input type="date" value="${rd.dueDate || ''}" onchange="updateRDField(${idx}, 'dueDate', this.value)" oninput="updateRDField(${idx}, 'dueDate', this.value)"
+                                class="bg-[#F7F4ED]/80 dark:bg-[#131714]/80 border border-[#C7D3C0] dark:border-[#8FA28A]/25 focus:border-[#8FA28A] focus:ring-2 focus:ring-[#8FA28A]/15 rounded-xl px-2 py-1.5 w-full text-[#1C241E] dark:text-[#F7F4ED] text-xs font-semibold focus:outline-none transition cursor-pointer" title="Installment Due Date">
+                        </td>
+                        <td class="py-2.5 px-2 min-w-[110px]">
+                            <div class="flex items-center gap-1.5">
+                                <div id="rd-badge-box-${idx}">
+                                    ${badgeMarkup}
+                                </div>
+                                <button type="button" onclick="triggerRDEmailManual(${idx})"
+                                    class="p-1.5 text-xs text-[#8FA28A] hover:bg-[#8FA28A]/15 rounded-lg transition active:scale-95 shrink-0"
+                                    title="Send / Test RD due alert to midhunmoorthiyedam@gmail.com">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                </button>
+                                <button type="button" onclick="advanceRDMonth(${idx})"
+                                    class="p-1 px-1.5 text-[10px] font-bold text-[#967634] dark:text-[#C8A96B] hover:bg-[#C8A96B]/15 rounded-lg transition active:scale-95 shrink-0 border border-[#C8A96B]/30"
+                                    title="Installment Paid / Advance date +1 Month & Add Installment to Balance">
+                                    +1M
+                                </button>
+                            </div>
+                        </td>
+                        <td class="py-2.5 pl-2 text-right w-8">
+                            <button type="button" onclick="removeRDRow(${idx})"
+                                class="text-[#5E7060]/60 dark:text-[#A4B5A3]/60 hover:text-[#C8A96B] hover:bg-[#C8A96B]/15 p-1.5 rounded-lg transition active:scale-90"
+                                title="Delete RD">
+                                <i class="fa-solid fa-trash-can text-xs"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function addRDRow() {
+            if (!state.rds) state.rds = [];
+            state.rds.push({
+                bank: '',
+                monthlyAmount: 0,
+                balance: 0,
+                dueDate: '',
+                lastAlertSent: null
+            });
+            renderRDRows();
+            saveAndRecalculate();
+        }
+
+        function updateRDField(idx, field, val) {
+            if (!state.rds || !state.rds[idx]) return;
+            if (field === 'monthlyAmount' || field === 'balance') {
+                state.rds[idx][field] = val === '' ? '' : (parseFloat(val) || 0);
+                saveAndRecalculate();
+            } else if (field === 'bank') {
+                state.rds[idx].bank = val;
+                localStorage.setItem('family_wealth_state', JSON.stringify(state));
+                autoSaveToDisk();
+            } else if (field === 'dueDate') {
+                state.rds[idx].dueDate = val;
+                localStorage.setItem('family_wealth_state', JSON.stringify(state));
+                updateRDRowBadge(idx);
+                checkRDDueDates();
+                autoSaveToDisk();
+            }
+        }
+
+        function advanceRDMonth(idx) {
+            if (!state.rds || !state.rds[idx]) return;
+            const rd = state.rds[idx];
+            let baseDate = rd.dueDate ? new Date(rd.dueDate + "T00:00:00") : new Date();
+            baseDate.setMonth(baseDate.getMonth() + 1);
+            rd.dueDate = baseDate.toISOString().split('T')[0];
+            rd.lastAlertSent = null;
+            const monthlyVal = parseFloat(rd.monthlyAmount) || 0;
+            if (monthlyVal > 0) {
+                rd.balance = (parseFloat(rd.balance) || 0) + monthlyVal;
+            }
+            localStorage.setItem('family_wealth_state', JSON.stringify(state));
+            renderRDRows();
+            saveAndRecalculate();
+        }
+
+        function removeRDRow(idx) {
+            if (!state.rds) return;
+            state.rds.splice(idx, 1);
+            renderRDRows();
+            saveAndRecalculate();
+        }
+
+        function triggerRDEmailManual(idx) {
+            if (!state.rds || !state.rds[idx]) return;
+            sendRDDueEmail(state.rds[idx], true);
+        }
+
+        // Automated and On-Demand RD Installment Alert Dispatcher to midhunmoorthiyedam@gmail.com
+        async function sendRDDueEmail(rd, isManual = false) {
+            const emailTarget = (window.APP_SETTINGS && window.APP_SETTINGS.alertEmail)
+                ? window.APP_SETTINGS.alertEmail
+                : "midhunmoorthiyedam@gmail.com";
+
+            const bankName = rd.bank || "Recurring Deposit Bank";
+            const monthlyAmt = parseFloat(rd.monthlyAmount) || 0;
+            const formattedMonthlyAmt = monthlyAmt.toLocaleString('en-IN');
+            const balanceAmt = parseFloat(rd.balance) || 0;
+            const formattedBalanceAmt = balanceAmt.toLocaleString('en-IN');
+            const dueDateStr = rd.dueDate || "Due Date Reached";
+            const alertType = isManual ? "On-Demand Manual RD Alert / Test" : "Automated Monthly RD Installment Due Date Reached";
+            const subject = `[MI-AS Wealth] Recurring Deposit (RD) Due Alert: ${bankName} - ₹${formattedMonthlyAmt}`;
+            const noticeMessage = `This is an automated notification from MI-AS Wealth. Your Recurring Deposit (RD) monthly installment with ${bankName} for ₹${formattedMonthlyAmt} (Current Balance: ₹${formattedBalanceAmt}) is due on ${dueDateStr}. Please ensure sufficient balance in your linked bank account.`;
+
+            // Prepare Hidden Form for Silent POST Submission to FormSubmit
+            const form = document.getElementById('fd-email-form');
+            if (form) {
+                form.action = `https://formsubmit.co/${emailTarget}`;
+                const setVal = (id, val) => { const el = document.getElementById(id); if (el) el.value = val; };
+                setVal('fd-email-subject', subject);
+                setVal('fd-email-bank', `Recurring Deposit: ${bankName}`);
+                setVal('fd-email-amount', `₹${formattedMonthlyAmt} (Monthly RD) | Balance: ₹${formattedBalanceAmt}`);
+                setVal('fd-email-duedate', dueDateStr);
+                setVal('fd-email-status', alertType);
+                setVal('fd-email-message', noticeMessage);
+                setVal('fd-email-time', new Date().toLocaleString('en-IN'));
+
+                try {
+                    form.submit();
+                    console.log(`RD Email dispatched via background form to ${emailTarget}`);
+                } catch (e) {
+                    console.warn("Background form submission caught:", e);
+                }
+            }
+
+            // Also attempt AJAX endpoint
+            try {
+                fetch(`https://formsubmit.co/ajax/${emailTarget}`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json", "Accept": "application/json" },
+                    body: JSON.stringify({
+                        _subject: subject,
+                        _replyto: emailTarget,
+                        "Category": "Recurring Deposit (RD)",
+                        "Bank Name": bankName,
+                        "Monthly Installment": `₹${formattedMonthlyAmt}`,
+                        "Accumulated Balance": `₹${formattedBalanceAmt}`,
+                        "Installment Due Date": dueDateStr,
+                        "Alert Type": alertType,
+                        "Notice": noticeMessage,
+                        _template: "table",
+                        _captcha: "false"
+                    })
+                }).catch(() => { });
+            } catch (err) { }
+
+            // Mark alert date
+            rd.lastAlertSent = new Date().toISOString();
+            localStorage.setItem('family_wealth_state', JSON.stringify(state));
+            const idx = state.rds.indexOf(rd);
+            if (idx !== -1) updateRDRowBadge(idx);
+
+            const mailtoBody = `Dear Midhun,\n\nYour Recurring Deposit details:\n- Bank: ${bankName}\n- Monthly Installment: ₹${formattedMonthlyAmt}\n- Accumulated Balance: ₹${formattedBalanceAmt}\n- Due Date: ${dueDateStr}\n\nPlease ensure your bank account has sufficient balance for installment debit.\n\nGenerated by MI-AS Wealth.`;
+            const mailtoUrl = `mailto:${emailTarget}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(mailtoBody)}`;
+
+            showNotificationBanner(
+                `🐷 RD due alert triggered for <strong>${bankName}</strong> (₹${formattedMonthlyAmt}, Due: ${dueDateStr}) to <strong>${emailTarget}</strong>.`,
+                false,
+                mailtoUrl,
+                'rd'
+            );
+        }
+
+        // Automatic RD Due Date Checker
+        function checkRDDueDates() {
+            if (!state.rds || state.rds.length === 0) return;
+            const today = new Date().toISOString().split('T')[0];
+
+            state.rds.forEach((rd) => {
+                if (rd.dueDate && rd.dueDate <= today && (parseFloat(rd.monthlyAmount) || 0) > 0) {
+                    const lastSentDay = rd.lastAlertSent ? rd.lastAlertSent.split('T')[0] : null;
+                    if (lastSentDay !== today) {
+                        console.log(`Auto-triggering RD alert for ${rd.bank} due on ${rd.dueDate}`);
+                        sendRDDueEmail(rd, false);
+                    }
+                }
+            });
+        }
+
         // Generate status badge HTML for an LIC Policy
         function getLICStatusBadgeHtml(policy) {
             const today = new Date().toISOString().split('T')[0];
@@ -1531,8 +1938,8 @@
                 }
             }
 
-            const alertSentNotice = (policy && policy.lastAlertSent) 
-                ? `<span class="text-[9px] text-[#5E7060]/80 dark:text-[#A4B5A3]/80 block mt-0.5" title="Premium alert dispatched on ${policy.lastAlertSent}"><i class="fa-solid fa-check-double text-[#8FA28A]"></i> Alerted ${new Date(policy.lastAlertSent).toLocaleDateString()}</span>` 
+            const alertSentNotice = (policy && policy.lastAlertSent)
+                ? `<span class="text-[9px] text-[#5E7060]/80 dark:text-[#A4B5A3]/80 block mt-0.5" title="Premium alert dispatched on ${policy.lastAlertSent}"><i class="fa-solid fa-check-double text-[#8FA28A]"></i> Alerted ${new Date(policy.lastAlertSent).toLocaleDateString()}</span>`
                 : '';
 
             return `<div>${statusBadge}${alertSentNotice}</div>`;
@@ -1728,8 +2135,8 @@
                         _template: "table",
                         _captcha: "false"
                     })
-                }).catch(() => {});
-            } catch (err) {}
+                }).catch(() => { });
+            } catch (err) { }
 
             // Mark alert date
             policy.lastAlertSent = new Date().toISOString();
@@ -1767,6 +2174,7 @@
         // Periodic check every 30 minutes if the tab stays open
         setInterval(() => {
             checkFDDueDates();
+            checkRDDueDates();
             checkSIPDueDates();
             checkLICDueDates();
         }, 1800000);
@@ -1790,8 +2198,8 @@
                 }
             }
 
-            const alertSentNotice = (mf && mf.lastSipAlertSent) 
-                ? `<span class="text-[9px] text-[#5E7060]/80 dark:text-[#A4B5A3]/80 block mt-0.5" title="SIP alert dispatched on ${mf.lastSipAlertSent}"><i class="fa-solid fa-check-double text-[#8FA28A]"></i> Alerted ${new Date(mf.lastSipAlertSent).toLocaleDateString()}</span>` 
+            const alertSentNotice = (mf && mf.lastSipAlertSent)
+                ? `<span class="text-[9px] text-[#5E7060]/80 dark:text-[#A4B5A3]/80 block mt-0.5" title="SIP alert dispatched on ${mf.lastSipAlertSent}"><i class="fa-solid fa-check-double text-[#8FA28A]"></i> Alerted ${new Date(mf.lastSipAlertSent).toLocaleDateString()}</span>`
                 : '';
 
             return `<div>${statusBadge}${alertSentNotice}</div>`;
@@ -1884,14 +2292,14 @@
 
         function addMFRow() {
             if (!state.mutualFunds) state.mutualFunds = [];
-            state.mutualFunds.push({ 
-                name: 'New Fund', 
-                units: 0, 
-                latestNav: 100, 
-                code: '', 
-                sipAmount: 0, 
-                sipDate: '', 
-                lastSipAlertSent: null 
+            state.mutualFunds.push({
+                name: 'New Fund',
+                units: 0,
+                latestNav: 100,
+                code: '',
+                sipAmount: 0,
+                sipDate: '',
+                lastSipAlertSent: null
             });
             renderMFRows();
             saveAndRecalculate();
@@ -1994,8 +2402,8 @@
                         _template: "table",
                         _captcha: "false"
                     })
-                }).catch(() => {});
-            } catch (err) {}
+                }).catch(() => { });
+            } catch (err) { }
 
             // Mark alert date
             mf.lastSipAlertSent = new Date().toISOString();
@@ -2111,7 +2519,7 @@
             chartInstance = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
-                    labels: ['Safe Assets (Bank/FD/LIC)', 'Investments (MF/Stocks)', 'Gold Holdings'],
+                    labels: ['Safe Assets (Bank/FD/RD/LIC)', 'Investments (MF/Stocks)', 'Gold Holdings'],
                     datasets: [{
                         data: [safe, invest, gold],
                         backgroundColor: ['#C7D3C0', '#8FA28A', '#C8A96B'],
@@ -2169,9 +2577,21 @@
         let diskFileHandle = null;
         let isServerConnected = false;
 
+        function getApiSaveUrl() {
+            return (window.location.protocol === 'http:' || window.location.protocol === 'https:')
+                ? '/api/save'
+                : 'http://localhost:3000/api/save';
+        }
+
+        function getApiDataUrl() {
+            return (window.location.protocol === 'http:' || window.location.protocol === 'https:')
+                ? '/api/data'
+                : 'http://localhost:3000/api/data';
+        }
+
         async function checkLocalServerConnection() {
             try {
-                const res = await fetch('/api/data', { cache: 'no-cache' });
+                const res = await fetch(getApiDataUrl(), { cache: 'no-cache' });
                 if (res.ok) {
                     isServerConnected = true;
                     updateDiskSyncBadge("Auto-saving to portfolio_data.json", true);
@@ -2189,7 +2609,7 @@
         async function autoSaveToDisk() {
             // 1. If Local Node.js server is running (/api/save)
             try {
-                fetch('/api/save', {
+                fetch(getApiSaveUrl(), {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(state)
@@ -2198,8 +2618,8 @@
                         isServerConnected = true;
                         updateDiskSyncBadge("Auto-saved to portfolio_data.json", true);
                     }
-                }).catch(() => {});
-            } catch (e) {}
+                }).catch(() => { });
+            } catch (e) { }
 
             // 2. If Native File System Access handle is active
             if (diskFileHandle) {
@@ -2215,9 +2635,9 @@
         }
 
         async function syncWithDiskFile() {
-            // Try saving via local server first if available
+            // 1. Try saving via local server first if available
             try {
-                const res = await fetch('/api/save', {
+                const res = await fetch(getApiSaveUrl(), {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(state)
@@ -2227,9 +2647,9 @@
                     showNotificationBanner("💾 Successfully saved current portfolio directly into <strong>portfolio_data.json</strong> and <strong>portfolio_data.js</strong>!", false, null, 'fd');
                     return;
                 }
-            } catch (e) {}
+            } catch (e) { }
 
-            // Native File System Access API
+            // 2. Native File System Access API
             if ('showSaveFilePicker' in window) {
                 try {
                     diskFileHandle = await window.showSaveFilePicker({
@@ -2244,9 +2664,11 @@
                     await writable.close();
                     updateDiskSyncBadge(`Linked: ${diskFileHandle.name}`, true);
                     showNotificationBanner(`📁 Direct disk sync active with <strong>${diskFileHandle.name}</strong>! All subsequent changes will save directly into this file.`, false, null, 'fd');
+                    return;
                 } catch (err) {
                     if (err.name !== 'AbortError') {
                         exportData();
+                        return;
                     }
                 }
             } else {
@@ -2257,6 +2679,17 @@
         function updateDiskSyncBadge(msg, isSuccess = true) {
             const textEl = document.getElementById('disk-sync-text');
             if (textEl) textEl.innerText = msg;
+            const headerBtn = document.getElementById('header-sync-btn');
+            if (headerBtn) {
+                headerBtn.title = msg;
+                const icon = headerBtn.querySelector('i');
+                if (icon) {
+                    icon.className = isSuccess ? "fa-solid fa-check text-xs" : "fa-solid fa-floppy-disk text-xs";
+                    setTimeout(() => {
+                        icon.className = "fa-solid fa-floppy-disk text-xs";
+                    }, 2500);
+                }
+            }
         }
 
         function importDataFromFile(event) {
@@ -2272,6 +2705,7 @@
                         state.savings = imported.savings !== undefined ? imported.savings : 0;
                         state.fd = imported.fd !== undefined ? imported.fd : 0;
                         state.fds = Array.isArray(imported.fds) ? imported.fds : [];
+                        state.rds = Array.isArray(imported.rds) ? imported.rds : [];
                         state.lic = Array.isArray(imported.lic) ? imported.lic : [];
                         state.mutualFunds = Array.isArray(imported.mutualFunds) ? imported.mutualFunds : [];
                         state.stocks = Array.isArray(imported.stocks) ? imported.stocks : [];
@@ -2297,6 +2731,7 @@
             dlAnchorElem.setAttribute("href", dataStr);
             dlAnchorElem.setAttribute("download", "portfolio_data.json");
             dlAnchorElem.click();
+            showNotificationBanner("💾 Downloaded latest <strong>portfolio_data.json</strong> backup to your computer!", false, null, 'fd');
         }
     </script>
 </body>
