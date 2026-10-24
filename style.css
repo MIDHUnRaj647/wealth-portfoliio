@@ -1,0 +1,69 @@
+/**
+ * MI-AS Wealth - Custom Stylesheet
+ */
+
+html,
+body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #F7F4ED;
+    color: #1C241E;
+}
+
+.dark body {
+    background-color: #131714;
+    color: #F7F4ED;
+}
+
+/* Custom scrollbar matching palette */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #F7F4ED;
+}
+
+.dark ::-webkit-scrollbar-track {
+    background: #131714;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #C7D3C0;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #8FA28A;
+}
+
+/* Hide native number input spinners for clean custom UI */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+/* Tabular numbers for clean financial alignment */
+.tabular-nums {
+    font-variant-numeric: tabular-nums;
+}
+
+/* Prevent input zoom on iOS Safari */
+@media screen and (max-width: 768px) {
+    input,
+    select,
+    textarea {
+        font-size: 16px !important;
+    }
+}
