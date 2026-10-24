@@ -24,6 +24,11 @@ const APP_SETTINGS = {
     passcodeHint: "",
 
     /**
+     * Destination email for automated FD maturity, SIP reminders, and LIC premium due alerts
+     */
+    alertEmail: "midhunmoorthiyedam@gmail.com",
+
+    /**
      * Baseline fallback gold price in ₹ per gram (approximate live market rate).
      */
     defaultGoldRate: 14438
