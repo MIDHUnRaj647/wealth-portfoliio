@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- Application Settings & Vault Passphrase Config -->
     <script src="appsettings.js"></script>
+    <script src="portfolio_data.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Open Sans Google Font -->
@@ -755,31 +756,56 @@
                         </div>
                     </div>
 
-                    <!-- Backup / Security Note Card -->
+                    <!-- Persistent Disk Storage & Encrypted Backup Card -->
                     <div
                         class="bg-[#FCFAF6]/90 dark:bg-[#1A201B]/90 backdrop-blur-xl border border-[#C7D3C0]/80 dark:border-[#8FA28A]/20 p-5 sm:p-6 rounded-2xl space-y-4 shadow-sm hover:shadow-md transition-shadow">
-                        <div class="flex items-center gap-2.5">
-                            <div
-                                class="w-8 h-8 rounded-xl bg-[#8FA28A]/15 text-[#8FA28A] flex items-center justify-center text-xs">
-                                <i class="fa-solid fa-shield"></i>
+                        <div class="flex items-center justify-between gap-2 flex-wrap">
+                            <div class="flex items-center gap-2.5">
+                                <div
+                                    class="w-9 h-9 rounded-xl bg-[#8FA28A]/15 text-[#5A6D58] dark:text-[#8FA28A] flex items-center justify-center text-sm border border-[#8FA28A]/25 shadow-xs">
+                                    <i class="fa-solid fa-hard-drive"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-sm text-[#1C241E] dark:text-[#F7F4ED]">Local Disk Storage & Backups</h3>
+                                    <p class="text-[11px] text-[#5E7060] dark:text-[#A4B5A3]">Permanent storage in project directory</p>
+                                </div>
                             </div>
-                            <div>
-                                <h3 class="font-bold text-sm text-[#1C241E] dark:text-[#F7F4ED]">Encrypted Storage &
-                                    Backup</h3>
-                                <p class="text-[11px] text-[#5E7060] dark:text-[#A4B5A3]">All data is maintained locally
-                                    in browser memory</p>
-                            </div>
+                            <span id="disk-sync-pill" class="text-[10px] font-extrabold text-[#5A6D58] dark:text-[#8FA28A] bg-[#8FA28A]/15 border border-[#8FA28A]/30 px-2.5 py-1 rounded-xl flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#8FA28A] animate-pulse"></span>
+                                <span id="disk-sync-text">portfolio_data.json linked</span>
+                            </span>
                         </div>
+
                         <p class="text-xs text-[#5E7060] dark:text-[#A4B5A3] leading-relaxed font-normal">
-                            All your financial information is stored purely on your local hardware (<code
-                                class="text-[#8FA28A] bg-[#F7F4ED] dark:bg-[#131714] border border-[#C7D3C0] dark:border-[#8FA28A]/25 px-1.5 py-0.5 rounded font-mono text-[11px]">localStorage</code>).
-                            No cloud transmission or external tracking occurs.
+                            Your portfolio data is backed by <code class="text-[#8FA28A] bg-[#F7F4ED] dark:bg-[#131714] border border-[#C7D3C0] dark:border-[#8FA28A]/25 px-1.5 py-0.5 rounded font-mono text-[11px]">portfolio_data.json</code> and <code class="text-[#8FA28A] bg-[#F7F4ED] dark:bg-[#131714] border border-[#C7D3C0] dark:border-[#8FA28A]/25 px-1.5 py-0.5 rounded font-mono text-[11px]">portfolio_data.js</code> inside your project directory. It is immune to browser cache clearing.
                         </p>
-                        <button onclick="exportData()"
-                            class="w-full bg-[#F7F4ED] dark:bg-[#131714] hover:bg-[#EDE8DC] dark:hover:bg-[#202721] active:scale-[0.99] border border-[#C7D3C0] dark:border-[#8FA28A]/25 text-xs py-3 rounded-xl transition flex items-center justify-center gap-2 text-[#1C241E] dark:text-[#F7F4ED] font-bold shadow-xs hover:border-[#8FA28A]/50">
-                            <i class="fa-solid fa-file-arrow-down text-sm text-[#8FA28A]"></i>
-                            <span>Export Encrypted Backup JSON</span>
-                        </button>
+
+                        <!-- Action Buttons Grid -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                            <!-- Direct Disk Save / Sync Button -->
+                            <button type="button" onclick="syncWithDiskFile()"
+                                class="w-full bg-[#8FA28A] hover:bg-[#7D9178] active:scale-[0.98] text-white text-xs py-2.5 px-3 rounded-xl transition duration-200 flex items-center justify-center gap-2 font-bold shadow-xs">
+                                <i class="fa-solid fa-floppy-disk text-xs"></i>
+                                <span>Save to Disk JSON</span>
+                            </button>
+
+                            <!-- Download Backup Button -->
+                            <button type="button" onclick="exportData()"
+                                class="w-full bg-[#F7F4ED] dark:bg-[#131714] hover:bg-[#EDE8DC] dark:hover:bg-[#202721] active:scale-[0.98] border border-[#C7D3C0] dark:border-[#8FA28A]/25 text-xs py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-2 text-[#1C241E] dark:text-[#F7F4ED] font-bold shadow-xs hover:border-[#8FA28A]/50">
+                                <i class="fa-solid fa-file-arrow-down text-xs text-[#8FA28A]"></i>
+                                <span>Export Backup JSON</span>
+                            </button>
+                        </div>
+
+                        <!-- Import / Restore Button -->
+                        <div class="pt-1">
+                            <input type="file" id="import-json-input" accept=".json" class="hidden" onchange="importDataFromFile(event)">
+                            <button type="button" onclick="document.getElementById('import-json-input').click()"
+                                class="w-full bg-[#FCFAF6] dark:bg-[#1A201B] hover:bg-[#8FA28A]/10 active:scale-[0.98] border border-dashed border-[#C7D3C0] dark:border-[#8FA28A]/35 text-xs py-2 px-3 rounded-xl transition flex items-center justify-center gap-2 text-[#5E7060] dark:text-[#A4B5A3] font-semibold hover:text-[#1C241E] dark:hover:text-[#F7F4ED]">
+                                <i class="fa-solid fa-file-arrow-up text-xs text-[#C8A96B]"></i>
+                                <span>Import / Restore from JSON File</span>
+                            </button>
+                        </div>
                     </div>
 
                 </div>
@@ -1023,16 +1049,21 @@
             }
         });
 
-        // Live App Core Data State
-        let state = JSON.parse(localStorage.getItem('family_wealth_state')) || {
-            goldGrams: 0,
-            savings: 0,
-            fd: 0,
-            fds: [],         // {bank, amount, dueDate, lastAlertSent}
-            lic: [],         // {name, policyNo, premium, sumAssured, dueDate, lastAlertSent}
-            mutualFunds: [], // {name, units, code, latestNav, sipAmount, sipDate, lastSipAlertSent}
-            stocks: []       // {name, qty, val}
-        };
+        // Baseline from portfolio_data.js in project directory
+        const defaultPortfolio = (window.PORTFOLIO_DATA && typeof window.PORTFOLIO_DATA === 'object')
+            ? JSON.parse(JSON.stringify(window.PORTFOLIO_DATA))
+            : {
+                goldGrams: 0,
+                savings: 0,
+                fd: 0,
+                fds: [],
+                lic: [],
+                mutualFunds: [],
+                stocks: []
+            };
+
+        // Live App Core Data State: Reads from browser localStorage, or defaults to portfolio_data.js
+        let state = JSON.parse(localStorage.getItem('family_wealth_state')) || defaultPortfolio;
 
         // Backward compatibility migration for FDs
         if (!state.fds) {
@@ -1092,6 +1123,7 @@
             checkFDDueDates();
             checkSIPDueDates();
             checkLICDueDates();
+            checkLocalServerConnection();
         }
 
         async function fetchLiveMarketData() {
@@ -1117,6 +1149,7 @@
 
             localStorage.setItem('family_wealth_state', JSON.stringify(state));
             recalculateAll();
+            autoSaveToDisk();
         }
 
         function recalculateAll() {
@@ -2130,11 +2163,139 @@
             location.reload();
         }
 
+        // -------------------------------------------------------------
+        // Persistent Disk File Sync, Import & Export Engine
+        // -------------------------------------------------------------
+        let diskFileHandle = null;
+        let isServerConnected = false;
+
+        async function checkLocalServerConnection() {
+            try {
+                const res = await fetch('/api/data', { cache: 'no-cache' });
+                if (res.ok) {
+                    isServerConnected = true;
+                    updateDiskSyncBadge("Auto-saving to portfolio_data.json", true);
+                    console.log("Connected to MI-AS Wealth Local Server on port 3000");
+                }
+            } catch (e) {
+                // Not running over local server (running standalone file:///)
+                isServerConnected = false;
+                if (!diskFileHandle) {
+                    updateDiskSyncBadge("portfolio_data.json linked", true);
+                }
+            }
+        }
+
+        async function autoSaveToDisk() {
+            // 1. If Local Node.js server is running (/api/save)
+            try {
+                fetch('/api/save', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(state)
+                }).then(res => {
+                    if (res.ok) {
+                        isServerConnected = true;
+                        updateDiskSyncBadge("Auto-saved to portfolio_data.json", true);
+                    }
+                }).catch(() => {});
+            } catch (e) {}
+
+            // 2. If Native File System Access handle is active
+            if (diskFileHandle) {
+                try {
+                    const writable = await diskFileHandle.createWritable();
+                    await writable.write(JSON.stringify(state, null, 2));
+                    await writable.close();
+                    updateDiskSyncBadge(`Saved to ${diskFileHandle.name}`, true);
+                } catch (e) {
+                    console.warn("Disk handle write warning:", e);
+                }
+            }
+        }
+
+        async function syncWithDiskFile() {
+            // Try saving via local server first if available
+            try {
+                const res = await fetch('/api/save', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(state)
+                });
+                if (res.ok) {
+                    updateDiskSyncBadge("Saved to portfolio_data.json", true);
+                    showNotificationBanner("💾 Successfully saved current portfolio directly into <strong>portfolio_data.json</strong> and <strong>portfolio_data.js</strong>!", false, null, 'fd');
+                    return;
+                }
+            } catch (e) {}
+
+            // Native File System Access API
+            if ('showSaveFilePicker' in window) {
+                try {
+                    diskFileHandle = await window.showSaveFilePicker({
+                        suggestedName: 'portfolio_data.json',
+                        types: [{
+                            description: 'JSON Portfolio Data',
+                            accept: { 'application/json': ['.json'] }
+                        }]
+                    });
+                    const writable = await diskFileHandle.createWritable();
+                    await writable.write(JSON.stringify(state, null, 2));
+                    await writable.close();
+                    updateDiskSyncBadge(`Linked: ${diskFileHandle.name}`, true);
+                    showNotificationBanner(`📁 Direct disk sync active with <strong>${diskFileHandle.name}</strong>! All subsequent changes will save directly into this file.`, false, null, 'fd');
+                } catch (err) {
+                    if (err.name !== 'AbortError') {
+                        exportData();
+                    }
+                }
+            } else {
+                exportData();
+            }
+        }
+
+        function updateDiskSyncBadge(msg, isSuccess = true) {
+            const textEl = document.getElementById('disk-sync-text');
+            if (textEl) textEl.innerText = msg;
+        }
+
+        function importDataFromFile(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                try {
+                    const imported = JSON.parse(e.target.result);
+                    if (typeof imported === 'object' && imported !== null) {
+                        state.goldGrams = imported.goldGrams !== undefined ? imported.goldGrams : 0;
+                        state.savings = imported.savings !== undefined ? imported.savings : 0;
+                        state.fd = imported.fd !== undefined ? imported.fd : 0;
+                        state.fds = Array.isArray(imported.fds) ? imported.fds : [];
+                        state.lic = Array.isArray(imported.lic) ? imported.lic : [];
+                        state.mutualFunds = Array.isArray(imported.mutualFunds) ? imported.mutualFunds : [];
+                        state.stocks = Array.isArray(imported.stocks) ? imported.stocks : [];
+
+                        localStorage.setItem('family_wealth_state', JSON.stringify(state));
+                        initDashboard();
+                        autoSaveToDisk();
+                        showNotificationBanner(`📂 Portfolio successfully restored from <strong>${file.name}</strong>!`, false, null, 'fd');
+                    } else {
+                        alert("The selected file is not a valid portfolio JSON file.");
+                    }
+                } catch (err) {
+                    alert("Error reading JSON file: " + err.message);
+                }
+            };
+            reader.readAsText(file);
+            event.target.value = '';
+        }
+
         function exportData() {
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state));
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state, null, 2));
             const dlAnchorElem = document.createElement('a');
             dlAnchorElem.setAttribute("href", dataStr);
-            dlAnchorElem.setAttribute("download", "mias_wealth_backup.json");
+            dlAnchorElem.setAttribute("download", "portfolio_data.json");
             dlAnchorElem.click();
         }
     </script>
